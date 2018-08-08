@@ -16,6 +16,8 @@
 		A65F34C02113FC06008AF740 /* PayMethodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65F34BF2113FC06008AF740 /* PayMethodViewController.swift */; };
 		A65F34C22113FC25008AF740 /* BankViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65F34C12113FC25008AF740 /* BankViewController.swift */; };
 		A65F34C42113FCFB008AF740 /* DuesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65F34C32113FCFB008AF740 /* DuesViewController.swift */; };
+		A672F407211A914F0008EB6A /* CreditCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A672F406211A914F0008EB6A /* CreditCard.swift */; };
+		A672F409211A91E50008EB6A /* Bank.swift in Sources */ = {isa = PBXBuildFile; fileRef = A672F408211A91E50008EB6A /* Bank.swift */; };
 		A69FA6722113FFD800A4E54E /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A69FA6712113FFD800A4E54E /* Alamofire.framework */; };
 		A69FA677211400DE00A4E54E /* MLObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = A69FA676211400DE00A4E54E /* MLObject.swift */; };
 		A69FA67A2114011B00A4E54E /* MLClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A69FA6792114011B00A4E54E /* MLClient.swift */; };
@@ -36,6 +38,8 @@
 		A65F34BF2113FC06008AF740 /* PayMethodViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayMethodViewController.swift; sourceTree = "<group>"; };
 		A65F34C12113FC25008AF740 /* BankViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankViewController.swift; sourceTree = "<group>"; };
 		A65F34C32113FCFB008AF740 /* DuesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DuesViewController.swift; sourceTree = "<group>"; };
+		A672F406211A914F0008EB6A /* CreditCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CreditCard.swift; path = MLChallenge/Model/CreditCard.swift; sourceTree = SOURCE_ROOT; };
+		A672F408211A91E50008EB6A /* Bank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Bank.swift; path = MLChallenge/Model/Bank.swift; sourceTree = SOURCE_ROOT; };
 		A69FA6712113FFD800A4E54E /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A69FA676211400DE00A4E54E /* MLObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLObject.swift; sourceTree = "<group>"; };
 		A69FA6792114011B00A4E54E /* MLClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLClient.swift; sourceTree = "<group>"; };
@@ -128,6 +132,8 @@
 			isa = PBXGroup;
 			children = (
 				A69FA676211400DE00A4E54E /* MLObject.swift */,
+				A672F406211A914F0008EB6A /* CreditCard.swift */,
+				A672F408211A91E50008EB6A /* Bank.swift */,
 			);
 			name = Model;
 			path = "New Group";
@@ -258,9 +264,11 @@
 				A65F34C42113FCFB008AF740 /* DuesViewController.swift in Sources */,
 				A65F34C02113FC06008AF740 /* PayMethodViewController.swift in Sources */,
 				A63EFA3D2119547B006C6FF8 /* MLConstants.swift in Sources */,
+				A672F407211A914F0008EB6A /* CreditCard.swift in Sources */,
 				A65F34B02113FA93008AF740 /* MasterViewController.swift in Sources */,
 				A69FA677211400DE00A4E54E /* MLObject.swift in Sources */,
 				A65F34C22113FC25008AF740 /* BankViewController.swift in Sources */,
+				A672F409211A91E50008EB6A /* Bank.swift in Sources */,
 				A65F34AE2113FA93008AF740 /* AppDelegate.swift in Sources */,
 				A69FA67A2114011B00A4E54E /* MLClient.swift in Sources */,
 			);

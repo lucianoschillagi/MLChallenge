@@ -6,16 +6,19 @@
 //  Copyright © 2018 luko. All rights reserved.
 //
 
-/*
-API
-cantidad cuotas
-https://api.mercadopago.com/v1/payment_methods/installments?public_key=PUBLIC_KEY
-*/
-
+/* Controller */
 
 import UIKit
 
 class DuesViewController: UIViewController {
+	
+	//*****************************************************************
+	// MARK: - Properties
+	//*****************************************************************
+
+	
+	let amountOfFeesModel = ["1", "2", "3", "4", "5", "6"]
+	
 
 	//*****************************************************************
 	// MARK: - IBOutlets
@@ -28,12 +31,11 @@ class DuesViewController: UIViewController {
 	@IBOutlet weak var userCreditCardLabel: UILabel!
 	@IBOutlet weak var bankLabel: UILabel!
 	@IBOutlet weak var userBankLabel: UILabel!
-	
 	@IBOutlet weak var dueLabel: UILabel!
-	// para que el usuario seleccione en cuantas cuotas quiere realizar  su pago
-	@IBOutlet weak var amountOfFees: UIPickerView!
+	@IBOutlet var amountOfFees: UIPickerView! // para que el usuario seleccione en cuantas cuotas quiere realizar  su pago
 	
-
+	@IBOutlet weak var labelRef: UILabel!
+	
 	//*****************************************************************
 	// MARK: - VC Life Cycle
 	//*****************************************************************
@@ -42,10 +44,44 @@ class DuesViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+		
+		
+		amountOfFees.dataSource = self
+		amountOfFees.delegate = self
+		
+		
     }
     
 
 	
 
 } // end class
+
+
+//*****************************************************************
+// MARK: - Picker View Methods
+//****************************************************************
+
+extension DuesViewController: UIPickerViewDataSource, UIPickerViewDelegate {
+	
+	func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+		return amountOfFeesModel.count
+	}
+	
+	func numberOfComponents(in pickerView: UIPickerView) -> Int {
+		return 1
+	}
+	
+	func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+		return amountOfFeesModel[row]
+	}
+	
+	func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+		labelRef.text = amountOfFeesModel[row]
+		//userDataPay.fees = amountOfFeesModel[row]
+		debugPrint("😅El usuario seleccionó \(amountOfFeesModel[row]) cuotas.")
+	}
+	
+	
+} // end ext
 

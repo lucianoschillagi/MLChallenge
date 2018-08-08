@@ -17,37 +17,41 @@ Una clase que encapsula los métodos para realizar la solicitud web.
 
 class MercadoLibreClient {
 	
-//	// task: obtener mediante una solicitud web un array de diccionario que representan un listado de contactos
-//	static func getContactsObject(_ completionHandlerForContactObject: @escaping ( _ success: Bool, _ contactObject: [Contact]?, _  errorString: String?) -> Void)  {
-//		
-//		// 1. realiza la llamada a la API, a través de la función request() de Alamofire, utilizando la URL de Iguana Fix (Apiary) 🚀
-//		Alamofire.request(IguanaFixClient.ApiURL).responseJSON { response in
-//			
-//			// response status code
-//			if let status = response.response?.statusCode {
-//				switch(status){
-//				case 200:
-//					print("example success")
-//				default:
-//					let errorMessage = "error with response status: \(status)"
-//					completionHandlerForContactObject(false, nil, errorMessage)
-//				}
-//			}
-//			// 2.  almacena la respuesta del servidor (response.result.value) en la constante 'jsonObjectResult' 📦
-//			if let jsonObjectResult = response.result.value {
-//				
-//				// 3. almacena el resultado de la solicitud en la constante 'resultsContacts'
-//				let resultsContacts = Contact.contactsFromResults(jsonObjectResult as! [[String : AnyObject]])
-//				// le pasa al completion handler el objeto recibido 'resultContacts' y que la solcitud fue exitosa
-//				completionHandlerForContactObject(true, resultsContacts, nil)
-//				
-//			}
-//			
-//		}
-//		
-//		
-//		
-//		
-//	}
+	// task: realiza una solicitud web para obtener los métodos de pago disponibles (tarjetas de crédito disponibles)
+	static func getPayMethods(_ completionHandlerForCreditCardsObject: @escaping ( _ success: Bool, _ creditCards: [CreditCard]?, _  errorString: String?) -> Void) {
+		
+		//1.
+		Alamofire.request("https://api.mercadopago.com/v1/payment_methods?public_key=444a9ef5-8a6b-429f-abdf-587639155d88") .responseJSON { response in
+			
+			// check response status code
+			if let status = response.response?.statusCode {
+				switch(status){
+				case 200:
+					print("👏example success")
+				default:
+					let errorMessage = "error with response status: \(status)"
+				}
+			}
+			
+			// si se obtuvo el JSON exitosamente
+			if let jsonObjectResult = response.result.value {
+				// 3. almacena el resultado de la solicitud en la constante 'resultsContacts'
+				let resultsContacts = CreditCard.creditCardsFromResults(jsonObjectResult as! [[String : AnyObject]])
+				completionHandlerForCreditCardsObject(true, resultsContacts, nil)
+
+			} // end if-let
+			
+		} // end closure
+		
+	}
+	
+	// task: realiza una solicitud web para obtener los bancos asociados a la tarjeta de crédito seleccionada por el usuario
+	static func getCardIssues(_ completionHandlerForCardIssuesObject: @escaping ( _ success: Bool, _ cardIssues: [Bank]?, _  errorString: String?) -> Void) {}
+	
+	
+	// task: ...
+	static func getRecommendMessage(_ completionHandlerForRecommendMessageObject: @escaping ( _ success: Bool, _ recommendMessage: [String:AnyObject]?, _  errorString: String?) -> Void) {}
+	
+
 	
 }

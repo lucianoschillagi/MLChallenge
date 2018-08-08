@@ -6,14 +6,9 @@
 //  Copyright © 2018 luko. All rights reserved.
 //
 
-/*
-API
-selección medio de pago (tarjeta)
-https://api.mercadopago.com/v1/payment_methods?public_key=PUBLIC_KEY
-*/
+/* Controller */
 
 import UIKit
-import Alamofire
 
 class PayMethodViewController: UIViewController {
 
@@ -25,6 +20,8 @@ class PayMethodViewController: UIViewController {
 	var jsonArray: NSArray?
 	var nameArray: Array<String> = []
 	var thumbailURLArray: Array<String> = []
+	
+	var allCreditCards = [CreditCard]()
 	
 	//*****************************************************************
 	// MARK: - IBOutlets
@@ -54,7 +51,7 @@ class PayMethodViewController: UIViewController {
 	override func viewDidLoad() {
         super.viewDidLoad()
 		
-		downloadDataFromAPI()
+		startRequest()
 
 //		// 1. realiza la llamada a la API de Mercado Libre para obtener los medios de pago permitidos 🚀
 //		Alamofire.request("https://api.mercadopago.com/v1/payment_methods?public_key=444a9ef5-8a6b-429f-abdf-587639155d88").responseJSON { response in
@@ -86,46 +83,39 @@ class PayMethodViewController: UIViewController {
 	// MARK: - Networking
 	//*****************************************************************
 	
-			func downloadDataFromAPI(){
-				//1.
-				Alamofire.request("https://api.mercadopago.com/v1/payment_methods?public_key=444a9ef5-8a6b-429f-abdf-587639155d88") .responseJSON { response in
-					
-								// response status code
-								if let status = response.response?.statusCode {
-									switch(status){
-									case 200:
-										print("👏example success")
-									default:
-										let errorMessage = "error with response status: \(status)"
-									}
-								}
-					
-					//2.
-					if let JSON = response.result.value{
-						//3.
-						self.jsonArray = JSON as? NSArray
-						//4.
-						for item in self.jsonArray! as! [NSDictionary]{
-							//5.
-							let name = item[MercadoLibreClient.JSONResponseKeys.Name] as? String
-							let thumbailURL = item[MercadoLibreClient.JSONResponseKeys.ThumbURL] as? String
-							self.nameArray.append((name)!)
-							self.thumbailURLArray.append((thumbailURL)!)
-						}
-						//6.
-						//self.tableView.reloadData()
+	// task: obtener un array de diccionarios que representan los datos de contacto de diferentes usuarios
+	func startRequest(){
+
+		MercadoLibreClient.getPayMethods { (success, creditCards, error) in
+
+			DispatchQueue.main.async {
+				if success {
+					if let creditCards = creditCards {
+						self.allCreditCards = creditCards // 🔌 👏
 						
-						// interando los arrays con los valores recibidos
-						for name in self.nameArray {
-							print(name)
+						// itera el array de [CreditCard] con los valores ya almacenados obtenidos
+						for card in self.allCreditCards {
+	
+							//debugPrint("😛Los objetos de las tarjetas son: \(card)")
+							debugPrint("📦Los nombres de las tarjetas aceptadas son: \(card.name)")
+							//debugPrint("🏄🏻‍♂️Los thumb de las tarjetas aceptadas son: \(card.thumb)")
+
 						}
-						
-						for thumb in self.thumbailURLArray {
-							print(thumb)
-						}
-		
+						debugPrint("Mercado Pago acepta \(creditCards.count) tarjetas de crédito.")
 					}
-				} // end closure
+					
+					// detener el indicador de actividad en red
+					//self.stopActivityIndicator()
+				} else {
+					//self.displayAlertView(nil, error)
+				}
+			} // end trailing closure
+		}
+	}
+	
+	
+			func downloadDataFromAPI(){
+				
 			}
 		
 		

@@ -6,12 +6,7 @@
 //  Copyright © 2018 luko. All rights reserved.
 //
 
-/*
-API
-selección banco
-https://api.mercadopago.com/v1/payment_methods/card_issuers?public_key=PUBLIC_KEY
-*/
-
+/* Controller */
 
 import UIKit
 import Alamofire
@@ -36,8 +31,7 @@ class BankViewController: UIViewController {
 	@IBOutlet weak var amountLabel: UILabel!
 	@IBOutlet weak var userAmountLabel: UILabel!
 	@IBOutlet weak var bankLabel: UILabel!
-	// los bancos asociados a la tarjeta elegida
-	@IBOutlet weak var banks: UIPickerView!
+	@IBOutlet weak var banks: UIPickerView! // los bancos asociados a la tarjeta elegida
 	
 
 	//*****************************************************************
@@ -101,7 +95,7 @@ class BankViewController: UIViewController {
 				
 			}
 		} // end closure
-	}
+	} // end method
 	
 	
 

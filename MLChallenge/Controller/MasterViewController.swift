@@ -6,8 +6,7 @@
 //  Copyright © 2018 luko. All rights reserved.
 //
 
-// API Mercado Pago
-// public_key: 444a9ef5-8a6b-429f-abdf-587639155d88
+/* Controller */
 
 
 import UIKit

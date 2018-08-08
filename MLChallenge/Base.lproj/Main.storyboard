@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14295.6" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14295.6" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="md0-4W-fzY">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -51,10 +51,10 @@
             </objects>
             <point key="canvasLocation" x="5.5999999999999996" y="133.5832083958021"/>
         </scene>
-        <!--Pay Method View Controller-->
+        <!--Payment Method View Controller-->
         <scene sceneID="GV7-Wd-DOY">
             <objects>
-                <viewController id="md0-4W-fzY" customClass="PayMethodViewController" customModule="MLChallenge" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Payment Method View Controller" id="md0-4W-fzY" customClass="PayMethodViewController" customModule="MLChallenge" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="DEx-TY-Glf">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -70,7 +70,6 @@
                                 <state key="normal" title="OK"/>
                                 <connections>
                                     <action selector="okButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="9cL-IV-IT6"/>
-                                    <action selector="okButtonPressed:" destination="md0-4W-fzY" eventType="touchUpInside" id="LZb-Fy-QPC"/>
                                     <segue destination="LFT-4A-nnp" kind="show" id="dLc-yJ-VGZ"/>
                                 </connections>
                             </button>
@@ -109,7 +108,6 @@
                         <outlet property="creditCardLabel" destination="lqr-Rr-iSF" id="DO0-E7-MC7"/>
                         <outlet property="creditCards" destination="xuS-lu-r4q" id="H7t-cM-ar8"/>
                         <outlet property="okButton" destination="T5P-XY-vhC" id="y1m-cu-A3U"/>
-                        <outlet property="selectedCreditCard" destination="xuS-lu-r4q" id="DnO-4d-naA"/>
                         <outlet property="userAmountLabel" destination="GlO-Ux-SwQ" id="5DV-Zg-t4P"/>
                     </connections>
                 </viewController>
@@ -135,7 +133,6 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="OK"/>
                                 <connections>
-                                    <action selector="okButtonPressed:" destination="md0-4W-fzY" eventType="touchUpInside" id="Bdy-Fr-7jh"/>
                                     <action selector="okButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="gYQ-bM-zj6"/>
                                 </connections>
                             </button>
@@ -294,6 +291,14 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cnk-Ma-5vV">
+                                <rect key="frame" x="166" y="323" width="42" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.46202266219999999" green="0.83828371759999998" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="0.64197011589999997" blue="0.60456819309999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="KZP-qY-XuK"/>
@@ -304,6 +309,7 @@
                         <outlet property="bankLabel" destination="b1z-5l-ohq" id="zZq-gH-B5U"/>
                         <outlet property="creditCardLabel" destination="kzE-bx-K1H" id="qYj-4r-x0c"/>
                         <outlet property="dueLabel" destination="nIV-um-Cwk" id="5T4-xa-chQ"/>
+                        <outlet property="labelRef" destination="Cnk-Ma-5vV" id="nJ8-Ct-1dh"/>
                         <outlet property="okButton" destination="8ny-9X-IiG" id="IYE-NX-aJg"/>
                         <outlet property="userAmountLabel" destination="qBk-Ho-dBB" id="8Se-GJ-JOP"/>
                         <outlet property="userBankLabel" destination="9f8-CB-DlF" id="UE9-HW-Xre"/>
