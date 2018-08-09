@@ -21,7 +21,10 @@ class PayMethodViewController: UIViewController {
 	var nameArray: Array<String> = []
 	var thumbailURLArray: Array<String> = []
 	
+	// las tarjetas de crédito aceptadas por Mercado Pago
 	var allCreditCards = [CreditCard]()
+	// la tarjeta de crédito seleccionada por el usuario
+	static let creditCardChoosen: String = ""
 	
 	//*****************************************************************
 	// MARK: - IBOutlets
@@ -31,7 +34,7 @@ class PayMethodViewController: UIViewController {
 	@IBOutlet weak var amountLabel: UILabel!
 	@IBOutlet weak var userAmountLabel: UILabel!
 	@IBOutlet weak var creditCardLabel: UILabel!
-	@IBOutlet weak var creditCards: UIPickerView!
+	@IBOutlet weak var creditCardsTableView: UITableView!
 	
 
 	//*****************************************************************
@@ -86,7 +89,7 @@ class PayMethodViewController: UIViewController {
 	// task: obtener un array de diccionarios que representan los datos de contacto de diferentes usuarios
 	func startRequest(){
 
-		MercadoLibreClient.getPayMethods { (success, creditCards, error) in
+		MercadoPagoClient.getPayMethods { (success, creditCards, error) in
 
 			DispatchQueue.main.async {
 				if success {
@@ -113,15 +116,36 @@ class PayMethodViewController: UIViewController {
 		}
 	}
 	
+} // end class
 	
-			func downloadDataFromAPI(){
-				
-			}
-		
-		
-		
-	} // end class
+
+//*****************************************************************
+// MARK: - Table View Delegate Methods
+//*****************************************************************
+
+extension PayMethodViewController: UITableViewDataSource {
 	
+	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+		debugPrint("la tabla de las tarjetas de crédito tiene \(allCreditCards.count) filas.")
+		return allCreditCards.count
+	}
+	
+	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+		let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+		return cell
+	}
+	
+}
+
+
+extension PayMethodViewController: UITableViewDelegate {
+	
+	
+	
+	
+	
+	
+}
 
 	
 	
@@ -135,17 +159,4 @@ class PayMethodViewController: UIViewController {
 	
 	
 	
-	
-	
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 

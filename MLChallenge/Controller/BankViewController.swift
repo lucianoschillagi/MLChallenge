@@ -18,6 +18,7 @@ class BankViewController: UIViewController {
 	// MARK: - Properties
 	//*****************************************************************
 
+	var allBanks = [Bank]()
 	var jsonArray: NSArray?
 	var nameArray: Array<String> = []
 	var thumbailURLArray: Array<String> = []
@@ -31,7 +32,7 @@ class BankViewController: UIViewController {
 	@IBOutlet weak var amountLabel: UILabel!
 	@IBOutlet weak var userAmountLabel: UILabel!
 	@IBOutlet weak var bankLabel: UILabel!
-	@IBOutlet weak var banks: UIPickerView! // los bancos asociados a la tarjeta elegida
+	@IBOutlet weak var banksTableView: UITableView!
 	
 
 	//*****************************************************************
@@ -45,8 +46,10 @@ class BankViewController: UIViewController {
 	//*****************************************************************
     override func viewDidLoad() {
         super.viewDidLoad()
+			
+        startRequest()
+			
 
-        downloadDataFromAPI()
     }
 	
 	
@@ -55,49 +58,64 @@ class BankViewController: UIViewController {
 	// MARK: - Networking
 	//*****************************************************************
 	
-	func downloadDataFromAPI(){
-		//1.
-		Alamofire.request("https://api.mercadopago.com/v1/payment_methods/card_issuers?public_key=444a9ef5-8a6b-429f-abdf-587639155d88&payment_method_id=visa") .responseJSON { response in
-			
-			// response status code
-			if let status = response.response?.statusCode {
-				switch(status){
-				case 200:
-					print("👏example success")
-				default:
-					let errorMessage = "error with response status: \(status)"
-				}
-			}
-			
-			//2.
-			if let JSON = response.result.value{
-				//3.
-				self.jsonArray = JSON as? NSArray
-				//4.
-				for item in self.jsonArray! as! [NSDictionary]{
-					//5.
-					let name = item["name"] as? String
-					let thumbailURL = item["thumbnail"] as? String
-					self.nameArray.append((name)!)
-					self.thumbailURLArray.append((thumbailURL)!)
-				}
-				//6.
-				//self.tableView.reloadData()
-				
-				// interando los arrays con los valores recibidos
-				for name in self.nameArray {
-					print(name)
-				}
-				
-				for thumb in self.thumbailURLArray {
-					print(thumb)
-				}
-				
-			}
-		} // end closure
-	} // end method
-	
-	
+	// task: obtener un array de diccionarios que representan los datos de contacto de diferentes usuarios
+	func startRequest(){
 
+		MercadoPagoClient.getCardIssues { (success, banks, error) in
+			debugPrint("hola")
+			DispatchQueue.main.async {
+				if success {
+					if let banks = banks {
+						self.allBanks = banks // 🔌 👏
+						
+						// itera el array de [Bank] con los valores ya almacenados obtenidos
+						for bank in self.allBanks {
+							
+							//debugPrint("😛Los objetos de las tarjetas son: \(card)")
+							debugPrint("📦Los nombres de las bancos asocidados a la tarjeta elegida son: \(bank.name)")
+							//debugPrint("🏄🏻‍♂️Los thumb de las tarjetas aceptadas son: \(card.thumb)")
+							
+						}
+						debugPrint("La tarjeta elegida tiene \(banks.count) bancos asociados.")
+					}
+					
+					// detener el indicador de actividad en red
+					//self.stopActivityIndicator()
+				} else {
+					//self.displayAlertView(nil, error)
+				}
+			} // end trailing closure
+		}
+	}
+	
 
 } // end class
+
+
+//*****************************************************************
+// MARK: - Table View Delegate Methods
+//*****************************************************************
+
+extension BankViewController: UITableViewDataSource {
+	
+	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+
+		return 0
+	}
+	
+	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+		let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+		return cell
+	}
+	
+}
+
+
+extension BankViewController: UITableViewDelegate {
+	
+	
+	
+	
+	
+	
+}

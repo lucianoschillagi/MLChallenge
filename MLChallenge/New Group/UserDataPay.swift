@@ -1,5 +1,5 @@
 //
-//  MLObject.swift
+//  UserDataPay.swift
 //  MLChallenge
 //
 //  Created by Luciano Schillagi on 03/08/2018.
@@ -11,8 +11,7 @@
 import Foundation
 
 /* Abstract:
-Un objeto que contiene los datos de pago introducidos por el usuario y una clave pública para interactuar con la API de Mercado Pago.
-Estos datos son necesario para pasarlos luego como valores de la peticiones de los 'API methods'
+Un objeto que contiene los datos de pago introducidos por el usuario.
 */
 
 struct UserDataPay {
@@ -21,22 +20,18 @@ struct UserDataPay {
 	// MARK: - Properties
 	//*****************************************************************
 	
-	// la clave pública
-	let publicKey: String = "444a9ef5-8a6b-429f-abdf-587639155d88"
-	// almacena el monto ingresado por el usuario
-	let amount: Double
-	// almacena la tarjeta seleccionada por el usuario
-	let creditCard: String
-	// almacena el banco asociado a la tarjeta seleccionada por el usuario
-	let bank: String
-	// almacena la cantidad de cuotas para el pago elegida por el usuario
+	// DATOS PROVISTOS POR EL USUARIO 👈
+	
+	// almacena el MONTO ingresado por el usuario
+	let amount: Double // 'amount'
+	// almacena la TARJETA seleccionada por el usuario
+	let creditCard: String // 'payment_method'
+	// almacena el BANCO elegido por el usuario
+	let bank: String // 'issuer.id'
+	// almacena la cantidad de CUOTAS para el pago elegida por el usuario
 	let fees: String
 	
-
-	
 }
-
-
 
 /*
 API

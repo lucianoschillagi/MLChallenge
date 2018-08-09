@@ -27,6 +27,8 @@ struct CreditCard {
 	// MARK: - Properties
 	//*****************************************************************
 	
+	// DATOS PROVISTOS POR EL SERVIDOR (API Mercado Pago) 👈
+	
 	var name: String
 	let thumb: String
 	

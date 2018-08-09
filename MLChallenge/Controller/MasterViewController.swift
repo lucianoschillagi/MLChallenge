@@ -8,14 +8,20 @@
 
 /* Controller */
 
-
 import UIKit
-import Alamofire
+
 
 class MasterViewController: UIViewController {
 
 	//*****************************************************************
 	// MARK: - Properties
+	//*****************************************************************
+	
+	// el monto ingresado por el usuario, capturado a través del text field
+	let amount: Double = Double()
+	
+	//*****************************************************************
+	// MARK: - IBOutlets
 	//*****************************************************************
 	
 	@IBOutlet weak var okButton: UIButton!
@@ -56,31 +62,7 @@ class MasterViewController: UIViewController {
 	// MARK: - Networking
 	//*****************************************************************
 	
-//	func downloadDataFromAPI(){
-//		//1.
-//		Alamofire.request("https://api.mercadopago.com/v1/payment_methods/installments?public_key=444a9ef5-8a6b-429f-abdf-587639155d88&amount=15&payment_method_id=visa&issuer.id=288") .responseJSON { response in
-//
-//			// response status code
-//			if let status = response.response?.statusCode {
-//				switch(status){
-//				case 200:
-//					print("👏example success")
-//				default:
-//					let errorMessage = "error with response status: \(status)"
-//				}
-//			}
-//
-//			//2.
-//			if let JSON = response.result.value{
-//				debugPrint(JSON)
-//				}
-//				//6.
-//				//self.tableView.reloadData()
-//
-//
-//
-//			} // end closure
-//		} // end method
+	//TODO: una vez que el usuario ingresa todos los datos de pago, realizar una solicitud web para obtener, con esos datos, el 'recommend_message' adecuado. Usar los valores buscados en ese objeto, para contruir el 'alert view'
 
 
 } // end class
