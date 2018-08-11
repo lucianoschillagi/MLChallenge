@@ -77,11 +77,11 @@ extension MercadoPagoClient {
 		// la clave pública para interactuar con la API de Mercado Pago
 		static let PublicKey = "444a9ef5-8a6b-429f-abdf-587639155d88"
 		// el método de pago (tarjeta de crédito) elegida por el usuario
-		static let PaymentMethod = ""
+		static var PaymentMethod = ""
 		// el monto a pagar por el usuario
-		static let Amount = ""
+		static var Amount = ""
 		// el banco elegido asociado a su tarjeta de crédito
-		static let IssuerId = ""
+		static var IssuerId = ""
 		
 	}
 	

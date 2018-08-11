@@ -30,7 +30,7 @@ struct CreditCard {
 	// DATOS PROVISTOS POR EL SERVIDOR (API Mercado Pago) 👈
 	
 	var name: String
-	let thumb: String
+	let thumb: String?
 	
 	//*****************************************************************
 	// MARK: - Initializers
@@ -41,7 +41,7 @@ struct CreditCard {
 		// name
 		name = dictionary["name"] as! String
 		// thumb
-		thumb = dictionary["thumbnail"] as! String
+		thumb = dictionary["secure_thumbnail"] as! String
 		
 //		// name
 //		if let nameString = dictionary["name"] as? String {

@@ -68,17 +68,16 @@
                                     <segue destination="LFT-4A-nnp" kind="show" id="dLc-yJ-VGZ"/>
                                 </connections>
                             </button>
-                            <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="hhd-yF-XGF">
+                            <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="hhd-yF-XGF">
                                 <rect key="frame" x="55" y="77" width="264" height="50"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Monto:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LXf-kP-JVP">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Monto:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LXf-kP-JVP">
                                         <rect key="frame" x="0.0" y="0.0" width="54" height="50"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GlO-Ux-SwQ">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GlO-Ux-SwQ">
                                         <rect key="frame" x="74" y="0.0" width="190" height="50"/>
                                         <color key="backgroundColor" red="0.72941176470000002" green="0.89411764709999997" blue="0.92156862750000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -87,9 +86,9 @@
                                     </label>
                                 </subviews>
                             </stackView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Tarjeta de Crédito" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lqr-Rr-iSF">
-                                <rect key="frame" x="119" y="170" width="136" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tarjeta de Crédito" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lqr-Rr-iSF">
+                                <rect key="frame" x="119" y="170.5" width="136" height="20.5"/>
+                                <color key="backgroundColor" red="0.46202266219999999" green="0.83828371759999998" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -99,7 +98,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="3bW-jt-9Z7">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="3bW-jt-9Z7">
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="3bW-jt-9Z7" id="Tyf-CG-fcW">
@@ -109,15 +108,31 @@
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
-                                    <outlet property="dataSource" destination="md0-4W-fzY" id="Q2J-YD-Fxd"/>
-                                    <outlet property="delegate" destination="md0-4W-fzY" id="adX-WX-isa"/>
+                                    <outlet property="dataSource" destination="md0-4W-fzY" id="kF4-7c-V3e"/>
+                                    <outlet property="delegate" destination="md0-4W-fzY" id="4NO-Y6-7bL"/>
                                 </connections>
                             </tableView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="sMm-JC-e5L">
+                                <rect key="frame" x="0.0" y="323" width="375" height="20"/>
+                                <color key="color" red="0.46202266219999999" green="0.83828371759999998" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" red="0.93725490199999995" green="0.90196078430000004" blue="0.90196078430000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="1MW-Hv-ll9" firstAttribute="trailing" secondItem="hhd-yF-XGF" secondAttribute="trailing" constant="56" id="0h5-yF-nZj"/>
+                            <constraint firstItem="1MW-Hv-ll9" firstAttribute="trailing" secondItem="lqr-Rr-iSF" secondAttribute="trailing" constant="120" id="3pd-yT-LF9"/>
+                            <constraint firstItem="sMm-JC-e5L" firstAttribute="trailing" secondItem="1MW-Hv-ll9" secondAttribute="trailing" id="GGL-jc-tfA"/>
+                            <constraint firstItem="hhd-yF-XGF" firstAttribute="top" secondItem="1MW-Hv-ll9" secondAttribute="top" constant="57" id="THT-DY-mIf"/>
+                            <constraint firstItem="lqr-Rr-iSF" firstAttribute="leading" secondItem="1MW-Hv-ll9" secondAttribute="leading" constant="119" id="Vqz-wo-R60"/>
+                            <constraint firstItem="sMm-JC-e5L" firstAttribute="leading" secondItem="1MW-Hv-ll9" secondAttribute="leading" id="WbF-Bt-ala"/>
+                            <constraint firstItem="1MW-Hv-ll9" firstAttribute="bottom" secondItem="sMm-JC-e5L" secondAttribute="bottom" constant="324" id="WlS-et-fex"/>
+                            <constraint firstItem="lqr-Rr-iSF" firstAttribute="top" secondItem="1MW-Hv-ll9" secondAttribute="top" constant="150.5" id="lXq-M8-b2m"/>
+                            <constraint firstItem="hhd-yF-XGF" firstAttribute="leading" secondItem="1MW-Hv-ll9" secondAttribute="leading" constant="55" id="yFd-ld-T63"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="1MW-Hv-ll9"/>
                     </view>
                     <connections>
+                        <outlet property="activityIndicator" destination="sMm-JC-e5L" id="HwN-u1-VKJ"/>
                         <outlet property="amountLabel" destination="LXf-kP-JVP" id="Uua-UK-uCI"/>
                         <outlet property="creditCardLabel" destination="lqr-Rr-iSF" id="DO0-E7-MC7"/>
                         <outlet property="creditCardsTableView" destination="s8d-ub-TX2" id="Leo-1h-5ct"/>
@@ -187,9 +202,8 @@
                                     </stackView>
                                 </subviews>
                             </stackView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Bank" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L9A-NH-BHR">
-                                <rect key="frame" x="176" y="239" width="39" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Banco" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L9A-NH-BHR">
+                                <rect key="frame" x="176" y="239" width="49" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -199,7 +213,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="nPW-JG-ZWi">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="nPW-JG-ZWi">
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="nPW-JG-ZWi" id="NBf-pd-Gbg">
@@ -213,11 +227,21 @@
                                     <outlet property="delegate" destination="LFT-4A-nnp" id="MRR-5N-ygQ"/>
                                 </connections>
                             </tableView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="UkL-Ec-Wlf">
+                                <rect key="frame" x="177" y="323" width="20" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" red="0.46202266219999999" green="0.83828371759999998" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="L9A-NH-BHR" firstAttribute="top" secondItem="Ic7-AQ-1Es" secondAttribute="top" constant="219" id="Xqq-Sz-sZC"/>
+                            <constraint firstItem="Ic7-AQ-1Es" firstAttribute="trailing" secondItem="L9A-NH-BHR" secondAttribute="trailing" constant="150" id="YDM-uR-PnE"/>
+                            <constraint firstItem="L9A-NH-BHR" firstAttribute="leading" secondItem="Ic7-AQ-1Es" secondAttribute="leading" constant="176" id="uIN-ag-85W"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="Ic7-AQ-1Es"/>
                     </view>
                     <connections>
+                        <outlet property="activityIndicator" destination="UkL-Ec-Wlf" id="vPo-fb-HIn"/>
                         <outlet property="amountLabel" destination="ZPB-pX-pFW" id="n7s-yK-LzG"/>
                         <outlet property="bankLabel" destination="L9A-NH-BHR" id="Yz7-pg-ETa"/>
                         <outlet property="banksTableView" destination="BJH-14-oL6" id="HGD-Hz-wUI"/>

@@ -67,7 +67,7 @@ class MercadoPagoClient: NSObject {
 	// task: realiza una solicitud web para obtener los BANCOS asociados a la tarjeta de crédito seleccionada por el usuario
 	static func getCardIssues(_ completionHandlerForCardIssuesObject: @escaping ( _ success: Bool, _ cardIssues: [Bank]?, _  errorString: String?) -> Void) {
 		
-		let tarjetaElegidaPorUsuario = ["payment_method_id": PayMethodViewController.creditCardChoosen]
+		//let tarjetaElegidaPorUsuario = ["payment_method_id": PayMethodViewController.creditCardChoosen]
 		
 		// TODO: acá es necesario pasarle la tarjeta de crédito elegida por el usuario 👈
 		Alamofire.request("https://api.mercadopago.com/v1/payment_methods/card_issuers?public_key=444a9ef5-8a6b-429f-abdf-587639155d88&payment_method_id=visa") .responseJSON { response in
@@ -108,6 +108,38 @@ class MercadoPagoClient: NSObject {
 		-el monto final
 		*/
 	
+	}
+	
+	
+	// task: realiza una solicitud web donde envía la URL de la imagen y obtiene los datos de la misma
+	static func taskForGETImage(completionHandlerForImage: @escaping (_ imageData: Data?, _ error: NSError?) -> Void) {
+	
+		
+		//1.
+		Alamofire.request("https://www.mercadopago.com/org-img/MP3/API/logos/master.gif") .responseJSON { response in
+			
+			// check response status code
+			if let status = response.response?.statusCode {
+				switch(status){
+				case 200:
+					print("👏example success")
+				default:
+					let errorMessage = "🏋🏻‍♂️error with response status: \(status)"
+				}
+			}
+			
+			debugPrint("FFFFFFF\(response)")
+			
+			// si se obtuvo el JSON exitosamente
+			if let jsonObjectResult = response.result.value {
+				debugPrint("✏️\(jsonObjectResult)")
+				// 3. almacena el resultado de la solicitud en la constante 'resultsContacts'
+				//let resultsCreditCards = CreditCard.creditCardsFromResults(jsonObjectResult as! [[String : AnyObject]])
+				completionHandlerForImage(jsonObjectResult as! Data, nil)
+				
+			} // end if-let
+			
+		} // end closure
 	}
 	
 

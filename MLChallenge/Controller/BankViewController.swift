@@ -33,6 +33,7 @@ class BankViewController: UIViewController {
 	@IBOutlet weak var userAmountLabel: UILabel!
 	@IBOutlet weak var bankLabel: UILabel!
 	@IBOutlet weak var banksTableView: UITableView!
+	@IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 	
 
 	//*****************************************************************
@@ -48,9 +49,11 @@ class BankViewController: UIViewController {
         super.viewDidLoad()
 			
         startRequest()
-			
-
+				startActivityIndicator()
     }
+	
+	
+	
 	
 	
 	
@@ -67,6 +70,8 @@ class BankViewController: UIViewController {
 				if success {
 					if let banks = banks {
 						self.allBanks = banks // 🔌 👏
+						self.banksTableView.reloadData()
+						self.stopActivityIndicator()
 						
 						// itera el array de [Bank] con los valores ya almacenados obtenidos
 						for bank in self.allBanks {
@@ -88,6 +93,21 @@ class BankViewController: UIViewController {
 		}
 	}
 	
+	//*****************************************************************
+	// MARK: - Activity Indicator
+	//*****************************************************************
+	
+	func startActivityIndicator() {
+		activityIndicator.alpha = 1.0
+		activityIndicator.startAnimating()
+	}
+	
+	func stopActivityIndicator() {
+		activityIndicator.alpha = 0.0
+		activityIndicator.stopAnimating()
+	}
+	
+	
 
 } // end class
 
@@ -100,12 +120,18 @@ extension BankViewController: UITableViewDataSource {
 	
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
-		return 0
+		return allBanks.count
 	}
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-		return cell
+		
+		let cellReuseId = "cell"
+		let bank = allBanks[(indexPath as NSIndexPath).row]
+		let cell = tableView.dequeueReusableCell(withIdentifier: cellReuseId, for: indexPath) as UITableViewCell!
+		
+		cell?.textLabel?.text = bank.name
+		
+		return cell!
 	}
 	
 }
@@ -113,9 +139,12 @@ extension BankViewController: UITableViewDataSource {
 
 extension BankViewController: UITableViewDelegate {
 	
+	// task: almacenar el nombre del banco seleccionado para su posterior uso en la solicitud web
+	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		let bank = allBanks[(indexPath as NSIndexPath).row]
+		MercadoPagoClient.ParameterValues.IssuerId = bank.name // 🔌 👏
+		debugPrint("🎾 \(MercadoPagoClient.ParameterValues.IssuerId)")
+	}
 	
 	
-	
-	
-	
-}
+} // end ext

@@ -12,7 +12,6 @@ import UIKit
 
 class PayMethodViewController: UIViewController {
 
-	
 	//*****************************************************************
 	// MARK: - Properties
 	//*****************************************************************
@@ -24,7 +23,7 @@ class PayMethodViewController: UIViewController {
 	// las tarjetas de crédito aceptadas por Mercado Pago
 	var allCreditCards = [CreditCard]()
 	// la tarjeta de crédito seleccionada por el usuario
-	static let creditCardChoosen: String = ""
+	var creditCardChoosen: String = ""
 	
 	//*****************************************************************
 	// MARK: - IBOutlets
@@ -35,6 +34,7 @@ class PayMethodViewController: UIViewController {
 	@IBOutlet weak var userAmountLabel: UILabel!
 	@IBOutlet weak var creditCardLabel: UILabel!
 	@IBOutlet weak var creditCardsTableView: UITableView!
+	@IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 	
 
 	//*****************************************************************
@@ -54,33 +54,26 @@ class PayMethodViewController: UIViewController {
 	override func viewDidLoad() {
         super.viewDidLoad()
 		
+		// networking 🚀
 		startRequest()
-
-//		// 1. realiza la llamada a la API de Mercado Libre para obtener los medios de pago permitidos 🚀
-//		Alamofire.request("https://api.mercadopago.com/v1/payment_methods?public_key=444a9ef5-8a6b-429f-abdf-587639155d88").responseJSON { response in
-//
-//			// response status code
-//			if let status = response.response?.statusCode {
-//				switch(status){
-//				case 200:
-//					print("example success")
-//				default:
-//					let errorMessage = "error with response status: \(status)"
-//					//completionHandlerForContactObject(false, nil, errorMessage)
-//				}
-//			}
-//			// 2.  almacena la respuesta del servidor temporalmente en la constante 'jsonObjectResult' 📦
-//			if let jsonObjectResult = response.result.value {
-//
-//				// 3. almacena el resultado de la solicitud en la constante 'resultsContacts'
-//				//let resultsContacts = Contact.contactsFromResults(jsonObjectResult as! [[String : AnyObject]])
-//				debugPrint("el json obtenido es: \(jsonObjectResult)")
-//				// le pasa al completion handler el objeto recibido 'resultContacts' y que la solcitud fue exitosa
-//				//completionHandlerForContactObject(true, resultsContacts, nil)
-//
-//			}
-		
+		// activity indicator
+		startActivityIndicator()
 		}
+	
+	
+	//*****************************************************************
+	// MARK: - Activity Indicator
+	//*****************************************************************
+	
+	func startActivityIndicator() {
+		activityIndicator.alpha = 1.0
+		activityIndicator.startAnimating()
+	}
+	
+	func stopActivityIndicator() {
+		activityIndicator.alpha = 0.0
+		self.activityIndicator.stopAnimating()
+	}
 	
 	//*****************************************************************
 	// MARK: - Networking
@@ -90,21 +83,27 @@ class PayMethodViewController: UIViewController {
 	func startRequest(){
 
 		MercadoPagoClient.getPayMethods { (success, creditCards, error) in
-
+			
+			debugPrint("😎\(success), \(creditCards), \(error)")
+			
 			DispatchQueue.main.async {
+				// si la solicitud fue exitosa...
 				if success {
 					if let creditCards = creditCards {
 						self.allCreditCards = creditCards // 🔌 👏
-						
+						self.stopActivityIndicator()
+						self.creditCardsTableView.reloadData()
 						// itera el array de [CreditCard] con los valores ya almacenados obtenidos
 						for card in self.allCreditCards {
 	
 							//debugPrint("😛Los objetos de las tarjetas son: \(card)")
-							debugPrint("📦Los nombres de las tarjetas aceptadas son: \(card.name)")
-							//debugPrint("🏄🏻‍♂️Los thumb de las tarjetas aceptadas son: \(card.thumb)")
+							//debugPrint("📦Los nombres de las tarjetas aceptadas son: \(card.name)")
+							debugPrint("🎲Los thumbs de las tarjetas aceptadas son: \(card)")
+							debugPrint("🏄🏻‍♂️Los thumb de las tarjetas aceptadas son: \(card.thumb)")
 
 						}
 						debugPrint("Mercado Pago acepta \(creditCards.count) tarjetas de crédito.")
+			
 					}
 					
 					// detener el indicador de actividad en red
@@ -129,23 +128,53 @@ extension PayMethodViewController: UITableViewDataSource {
 		debugPrint("la tabla de las tarjetas de crédito tiene \(allCreditCards.count) filas.")
 		return allCreditCards.count
 	}
-	
+
+	// task: configurar las celdas de la tabla
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-		return cell
-	}
+		debugPrint("entro a la tabla")
+		
+		let cellReuseId = "cell"
+		let creditCard = allCreditCards[(indexPath as NSIndexPath).row]
+		let cell = tableView.dequeueReusableCell(withIdentifier: cellReuseId, for: indexPath) as UITableViewCell!
+		
+		cell?.textLabel?.text = creditCard.name
+		
+		// TODO: mostrar la imagen (tengo la url, hacer proceso)
 	
-}
+		if let thumbPath = creditCard.thumb {
+			// realiza la solicitud para obtener la imágen
+			MercadoPagoClient.taskForGETImage { (imageData, error) in
+				if let image = UIImage(data:imageData!) {
+					debugPrint("🎾\(image)")
+					DispatchQueue.main.async {
+						cell?.imageView?.image = image
+						
+					}
+				} else {
+					print(error ?? "empty error")
+					}
+				}
+				
+			} // end conditional binding
+		
+		return cell!
+		}
+		
+
+	
+} // end class
 
 
 extension PayMethodViewController: UITableViewDelegate {
 	
+	// task: almacenar el nombre de la tarjeta seleccionada para su posterior uso en la solicitud web
+	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		let creditCard = allCreditCards[(indexPath as NSIndexPath).row]
+		MercadoPagoClient.ParameterValues.PaymentMethod = creditCard.name // 🔌 👏
+		debugPrint("😅 \(MercadoPagoClient.ParameterValues.PaymentMethod)")
+	}
 	
-	
-	
-	
-	
-}
+} // end ext
 
 	
 	
