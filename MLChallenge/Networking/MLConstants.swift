@@ -46,9 +46,7 @@ extension MercadoPagoClient {
 	
 	struct Methods {
 		
-		
-		
-		
+
 	}
 	
 	

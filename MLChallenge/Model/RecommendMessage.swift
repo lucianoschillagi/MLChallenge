@@ -27,4 +27,8 @@ struct RecommendMessage {
 	// el total calculado del pago a realizar
 	let total: Double // DATOS PROVISTO POR LA API 👈
 	
+	
+	
+	
+	
 }

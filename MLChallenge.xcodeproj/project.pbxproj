@@ -45,6 +45,7 @@
 		A69FA6712113FFD800A4E54E /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A69FA676211400DE00A4E54E /* UserDataPay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataPay.swift; sourceTree = "<group>"; };
 		A69FA6792114011B00A4E54E /* MLClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLClient.swift; sourceTree = "<group>"; };
+		A6AD2B0F211E65F700650D12 /* URLComponents.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = URLComponents.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		C41CB1BDF1F6463920A83E07 /* Pods-MLChallenge.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MLChallenge.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MLChallenge/Pods-MLChallenge.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -100,8 +101,8 @@
 		A65F34AC2113FA93008AF740 /* MLChallenge */ = {
 			isa = PBXGroup;
 			children = (
-				A65F34B12113FA93008AF740 /* Main.storyboard */,
 				A65F34AD2113FA93008AF740 /* AppDelegate.swift */,
+				A6E66A94211E97FA002F36C8 /* View */,
 				A69FA6732114000400A4E54E /* Controller */,
 				A69FA678211400EB00A4E54E /* Model */,
 				A69FA6752114001700A4E54E /* Networking */,
@@ -145,11 +146,20 @@
 		A69FA67B2114013400A4E54E /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				A6AD2B0F211E65F700650D12 /* URLComponents.playground */,
 				A65F34B42113FA95008AF740 /* Assets.xcassets */,
-				A65F34B62113FA95008AF740 /* LaunchScreen.storyboard */,
 				A65F34B92113FA95008AF740 /* Info.plist */,
+				A65F34B62113FA95008AF740 /* LaunchScreen.storyboard */,
+				A65F34B12113FA93008AF740 /* Main.storyboard */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		A6E66A94211E97FA002F36C8 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

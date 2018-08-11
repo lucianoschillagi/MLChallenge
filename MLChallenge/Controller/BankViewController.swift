@@ -65,7 +65,6 @@ class BankViewController: UIViewController {
 	func startRequest(){
 
 		MercadoPagoClient.getCardIssues { (success, banks, error) in
-			debugPrint("hola")
 			DispatchQueue.main.async {
 				if success {
 					if let banks = banks {
@@ -123,6 +122,7 @@ extension BankViewController: UITableViewDataSource {
 		return allBanks.count
 	}
 	
+	// task: configurar las celdas de la tabla
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		
 		let cellReuseId = "cell"
@@ -130,12 +130,32 @@ extension BankViewController: UITableViewDataSource {
 		let cell = tableView.dequeueReusableCell(withIdentifier: cellReuseId, for: indexPath) as UITableViewCell!
 		
 		cell?.textLabel?.text = bank.name
+		debugPrint("los nombres de los bancos son \(bank.name)")
+		cell?.imageView!.contentMode = UIView.ContentMode.scaleAspectFit
+		
+		
+		
+		if let thumbPath = bank.thumb {
+			debugPrint("🗿\(thumbPath)")
+			// realiza la solicitud para obtener la imágen
+			let _ = MercadoPagoClient.taskForGETImage(thumbPath) { (imageData, error) in
+				debugPrint("🎲\(imageData)")
+				if let image = UIImage(data:imageData!) {
+					debugPrint("😎\(image)")
+					DispatchQueue.main.async {
+						cell?.imageView?.image = image
+					}
+				} else {
+					print(error ?? "empty error")
+				}
+			}
+			
+		} // end conditional binding
 		
 		return cell!
+		
 	}
-	
 }
-
 
 extension BankViewController: UITableViewDelegate {
 	

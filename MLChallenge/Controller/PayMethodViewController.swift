@@ -95,9 +95,6 @@ class PayMethodViewController: UIViewController {
 						self.creditCardsTableView.reloadData()
 						// itera el array de [CreditCard] con los valores ya almacenados obtenidos
 						for card in self.allCreditCards {
-	
-							//debugPrint("😛Los objetos de las tarjetas son: \(card)")
-							//debugPrint("📦Los nombres de las tarjetas aceptadas son: \(card.name)")
 							debugPrint("🎲Los thumbs de las tarjetas aceptadas son: \(card)")
 							debugPrint("🏄🏻‍♂️Los thumb de las tarjetas aceptadas son: \(card.thumb)")
 
@@ -131,24 +128,25 @@ extension PayMethodViewController: UITableViewDataSource {
 
 	// task: configurar las celdas de la tabla
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		debugPrint("entro a la tabla")
 		
 		let cellReuseId = "cell"
 		let creditCard = allCreditCards[(indexPath as NSIndexPath).row]
 		let cell = tableView.dequeueReusableCell(withIdentifier: cellReuseId, for: indexPath) as UITableViewCell!
 		
 		cell?.textLabel?.text = creditCard.name
+		cell?.imageView!.contentMode = UIView.ContentMode.scaleAspectFit
+
 		
-		// TODO: mostrar la imagen (tengo la url, hacer proceso)
 	
 		if let thumbPath = creditCard.thumb {
+			debugPrint("🗿\(thumbPath)")
 			// realiza la solicitud para obtener la imágen
-			MercadoPagoClient.taskForGETImage { (imageData, error) in
+			let _ = MercadoPagoClient.taskForGETImage(thumbPath) { (imageData, error) in
+				debugPrint("🎲\(imageData)")
 				if let image = UIImage(data:imageData!) {
-					debugPrint("🎾\(image)")
+					debugPrint("😎\(image)")
 					DispatchQueue.main.async {
 						cell?.imageView?.image = image
-						
 					}
 				} else {
 					print(error ?? "empty error")
@@ -158,9 +156,8 @@ extension PayMethodViewController: UITableViewDataSource {
 			} // end conditional binding
 		
 		return cell!
-		}
 		
-
+		}
 	
 } // end class
 
