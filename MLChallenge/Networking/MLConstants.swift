@@ -34,10 +34,7 @@ extension MercadoPagoClient {
 	static let ApiScheme = "https"
 	static let ApiHost = "api.mercadopago.com"
 	static let ApiPath = "/v1/payment_methods"
-	
-		// TODO: luego refactorizar
-	static let FirstCallUrl = "https://api.mercadopago.com/v1/payment_methods?public_key=444a9ef5-8a6b-429f-abdf-587639155d88"
-		
+	static let ApiPathCardIssues = "/v1/payment_methods/card_issuers"
 	}
 	
 	//*****************************************************************
@@ -80,9 +77,7 @@ extension MercadoPagoClient {
 		static var Amount = ""
 		// el banco elegido asociado a su tarjeta de crédito
 		static var IssuerId = ""
-		
 	}
-	
 	
 	//*****************************************************************
 	// MARK: - JSON Response Keys (Response)
@@ -92,7 +87,7 @@ extension MercadoPagoClient {
 	struct JSONResponseKeys {
 		
 		// para 'medio de pago' y 'banco'
-		static let Name = "name"
+		static let CreditCardId = "id"
 		static let ThumbURL = "thumbnail"
 		
 		// valores a extraer de 'recommend_message'

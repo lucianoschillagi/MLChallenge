@@ -67,7 +67,7 @@ class MercadoPagoClient: NSObject {
 
 			// si se obtuvo el JSON exitosamente
 			if let jsonObjectResult = response.result.value {
-				// 3. almacena el resultado de la solicitud en la constante 'resultsContacts'
+				// 3. almacena el resultado de la solicitud en la constante 'resultsCreditCards'
 				let resultsCreditCards = CreditCard.creditCardsFromResults(jsonObjectResult as! [[String : AnyObject]])
 				completionHandlerForCreditCardsObject(true, resultsCreditCards, nil)
 
@@ -83,7 +83,7 @@ class MercadoPagoClient: NSObject {
 		var components = URLComponents()
 		components.scheme = MercadoPagoClient.Constants.ApiScheme
 		components.host = MercadoPagoClient.Constants.ApiHost
-		components.path = MercadoPagoClient.Constants.ApiPath
+		components.path = MercadoPagoClient.Constants.ApiPathCardIssues
 		
 		components.queryItems = [URLQueryItem]()
 		let queryItem1 = URLQueryItem(name: MercadoPagoClient.ParameterKeys.PublicKey, value: MercadoPagoClient.ParameterValues.PublicKey)
@@ -91,16 +91,19 @@ class MercadoPagoClient: NSObject {
 		components.queryItems!.append(queryItem1)
 		components.queryItems!.append(queryItem2)
 		
+		
 		// TODO: acá es necesario pasarle la tarjeta de crédito elegida por el usuario 👈
 		Alamofire.request(components.url!) .responseJSON { response in
 			debugPrint("url para obtener los bancos \(components.url!)")
+			debugPrint("la respuesta debería mostrar los bancos asociados \(response)")
 			// check response status code
 			if let status = response.response?.statusCode {
 				switch(status){
 				case 200:
+					debugPrint("status code \(status)")
 					print("👏example success")
 				default:
-					let errorMessage = "error with response status: \(status)"
+					let errorMessage = "🥁error with response status: \(status)"
 				}
 			}
 			

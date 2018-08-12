@@ -167,7 +167,7 @@ extension PayMethodViewController: UITableViewDelegate {
 	// task: almacenar el nombre de la tarjeta seleccionada para su posterior uso en la solicitud web
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		let creditCard = allCreditCards[(indexPath as NSIndexPath).row]
-		MercadoPagoClient.ParameterValues.PaymentMethod = creditCard.name // 🔌 👏
+		MercadoPagoClient.ParameterValues.PaymentMethod = creditCard.id // 🔌 👏
 		debugPrint("😅 \(MercadoPagoClient.ParameterValues.PaymentMethod)")
 	}
 	

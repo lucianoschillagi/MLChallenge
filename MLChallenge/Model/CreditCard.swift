@@ -29,6 +29,7 @@ struct CreditCard {
 	
 	// DATOS PROVISTOS POR EL SERVIDOR (API Mercado Pago) 👈
 	
+	var id: String
 	var name: String
 	let thumb: String?
 	
@@ -38,6 +39,8 @@ struct CreditCard {
 	
 	// task: construir el objeto 'CreditCard' desde un diccionario (el JSON obtenido '[String:AnyObject]')
 	init(dictionary: [String:AnyObject]) {
+		// id
+		id = dictionary["id"] as! String
 		// name
 		name = dictionary["name"] as! String
 		// thumb

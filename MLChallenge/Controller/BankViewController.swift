@@ -162,6 +162,7 @@ extension BankViewController: UITableViewDelegate {
 	// task: almacenar el nombre del banco seleccionado para su posterior uso en la solicitud web
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		let bank = allBanks[(indexPath as NSIndexPath).row]
+		debugPrint("los bancos: \(bank)")
 		MercadoPagoClient.ParameterValues.IssuerId = bank.name // 🔌 👏
 		debugPrint("🎾 \(MercadoPagoClient.ParameterValues.IssuerId)")
 	}
