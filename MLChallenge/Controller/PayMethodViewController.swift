@@ -29,23 +29,13 @@ class PayMethodViewController: UIViewController {
 	// MARK: - IBOutlets
 	//*****************************************************************
 	
-	@IBOutlet weak var okButton: UIButton!
+
 	@IBOutlet weak var amountLabel: UILabel!
 	@IBOutlet weak var userAmountLabel: UILabel!
 	@IBOutlet weak var creditCardLabel: UILabel!
 	@IBOutlet weak var creditCardsTableView: UITableView!
 	@IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-	
-
-	//*****************************************************************
-	// MARK: - IBActions
-	//*****************************************************************
-	@IBAction func okButtonPressed(_ sender: UIButton) {
-		// cuando este botón es presionado, la aplicación navega hacia la siguiente página
-		
-	}
-	
-	
+	@IBOutlet weak var okButton: UIButton!
 	
 	
 	//*****************************************************************
@@ -58,7 +48,17 @@ class PayMethodViewController: UIViewController {
 		startRequest()
 		// activity indicator
 		startActivityIndicator()
+		
+		
 		}
+	
+	
+	
+	//*****************************************************************
+	// MARK: - Methods
+	//*****************************************************************
+	
+	
 	
 	
 	//*****************************************************************
@@ -167,7 +167,11 @@ extension PayMethodViewController: UITableViewDelegate {
 	// task: almacenar el nombre de la tarjeta seleccionada para su posterior uso en la solicitud web
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		let creditCard = allCreditCards[(indexPath as NSIndexPath).row]
+		
+		
 		MercadoPagoClient.ParameterValues.PaymentMethod = creditCard.id // 🔌 👏
+		creditCardChoosen = creditCard.name // 🔌 👏
+		
 		debugPrint("😅 \(MercadoPagoClient.ParameterValues.PaymentMethod)")
 	}
 	
@@ -175,9 +179,43 @@ extension PayMethodViewController: UITableViewDelegate {
 
 	
 	
+//*****************************************************************
+// MARK: - Navigation (Segue)
+//*****************************************************************
+
+extension PayMethodViewController {
 	
+	// task: enviar a 'BankViewController' el valor de la tarjeta seleccionada, para imprimirla luego en una etiqueta
+	override func prepare(for segue: UIStoryboardSegue,sender: Any?) {
+		
+		// si este vc tiene un segue con el identificador "toBankVC"
+		if segue.identifier == "toBankVC" {
+			
+		let bankVC = segue.destination as! BankViewController
+			
+			// le pasa a 'BankViewController' los siguientes datos: ///////////////////////////////
+			
+			/*
+			1- el valor de la tarjeta elegida
+			*/
+		
+			
+				
+				// caso contrario, pasar el nombre de la tarjeta seleccionada al vc siguiente
+			
+			// navegar hacia el 'BankViewController'
+				
+				bankVC.creditCardSelected = creditCardChoosen
+				
+			
+
+			}
+		
+		}
 	
-	
+}
+
+
 	
 	
 	

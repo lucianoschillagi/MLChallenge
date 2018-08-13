@@ -18,24 +18,27 @@ class BankViewController: UIViewController {
 	// MARK: - Properties
 	//*****************************************************************
 
+	
 	var allBanks = [Bank]()
 	var jsonArray: NSArray?
 	var nameArray: Array<String> = []
 	var thumbailURLArray: Array<String> = []
 	
+	var creditCardSelected: String! // el valor de la tarjeta seleccionada enviado por 'PayMathodVC'
 
 	//*****************************************************************
 	// MARK: - IBOutlets
 	//*****************************************************************
 	
-	@IBOutlet weak var okButton: UIButton!
 	@IBOutlet weak var amountLabel: UILabel!
-	@IBOutlet weak var userAmountLabel: UILabel!
-	@IBOutlet weak var bankLabel: UILabel!
+	@IBOutlet weak var amountChoosenLabel: UILabel!
+	@IBOutlet weak var creditCardLabel: UILabel!
+	@IBOutlet weak var creditCardChoosenLabel: UILabel!
+	@IBOutlet weak var okButton: UIButton!
+	
 	@IBOutlet weak var banksTableView: UITableView!
 	@IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 	
-
 	//*****************************************************************
 	// MARK: - Methods
 	//*****************************************************************
@@ -50,6 +53,12 @@ class BankViewController: UIViewController {
 			
         startRequest()
 				startActivityIndicator()
+			
+			creditCardChoosenLabel.text = creditCardSelected
+			debugPrint("la tarjeta seleccionada fue \(creditCardSelected)")
+			
+			
+			
     }
 	
 	
@@ -117,6 +126,7 @@ class BankViewController: UIViewController {
 
 extension BankViewController: UITableViewDataSource {
 	
+	// task: devolver la cantidad de filas que tendrá la tabla
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
 		return allBanks.count
@@ -164,6 +174,8 @@ extension BankViewController: UITableViewDelegate {
 		let bank = allBanks[(indexPath as NSIndexPath).row]
 		debugPrint("los bancos: \(bank)")
 		MercadoPagoClient.ParameterValues.IssuerId = bank.name // 🔌 👏
+		
+		
 		debugPrint("🎾 \(MercadoPagoClient.ParameterValues.IssuerId)")
 	}
 	
