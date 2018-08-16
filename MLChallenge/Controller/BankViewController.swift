@@ -18,7 +18,7 @@ class BankViewController: UIViewController {
 	// MARK: - Properties
 	//*****************************************************************
 
-	
+
 	var allBanks = [Bank]()
 	var jsonArray: NSArray?
 	var nameArray: Array<String> = []
@@ -34,7 +34,7 @@ class BankViewController: UIViewController {
 	@IBOutlet weak var amountChoosenLabel: UILabel!
 	@IBOutlet weak var creditCardLabel: UILabel!
 	@IBOutlet weak var creditCardChoosenLabel: UILabel!
-	@IBOutlet weak var okButton: UIButton!
+	@IBOutlet weak var nextButton: UIButton!
 	
 	@IBOutlet weak var banksTableView: UITableView!
 	@IBOutlet weak var activityIndicator: UIActivityIndicatorView!
@@ -54,18 +54,15 @@ class BankViewController: UIViewController {
         startRequest()
 				startActivityIndicator()
 			
+			// imprime los valores parciales de la compra en las etiquetas correspondientes
 			creditCardChoosenLabel.text = creditCardSelected
+			amountChoosenLabel.text = "$ " + CashTextFieldDelegate.montoSeleccionado
 			debugPrint("la tarjeta seleccionada fue \(creditCardSelected)")
 			
 			
 			
     }
-	
-	
-	
-	
-	
-	
+
 	//*****************************************************************
 	// MARK: - Networking
 	//*****************************************************************
@@ -96,7 +93,7 @@ class BankViewController: UIViewController {
 					//self.stopActivityIndicator()
 				} else {
 					//self.displayAlertView(nil, error)
-				}
+				} // end if-else
 			} // end trailing closure
 		}
 	}
@@ -173,11 +170,34 @@ extension BankViewController: UITableViewDelegate {
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		let bank = allBanks[(indexPath as NSIndexPath).row]
 		debugPrint("los bancos: \(bank)")
-		MercadoPagoClient.ParameterValues.IssuerId = bank.name // 🔌 👏
-		
-		
-		debugPrint("🎾 \(MercadoPagoClient.ParameterValues.IssuerId)")
+		MercadoPagoClient.ParameterValues.BankName = bank.name
+		MercadoPagoClient.ParameterValues.IssuerId = bank.id
 	}
 	
 	
 } // end ext
+
+
+//*****************************************************************
+// MARK: - Navigation (Segue)
+//*****************************************************************
+
+extension BankViewController {
+	
+	// task: enviar a 'DuesViewController' el valor del banco seleccionado, para imprimirlo luego en una etiqueta
+	override func prepare(for segue: UIStoryboardSegue,sender: Any?) {
+		
+		// si este vc tiene un segue con el identificador "toDuesVC"
+		if segue.identifier == "toDuesVC" {
+			
+			let duesVC = segue.destination as! InstallmentViewController
+			
+			// 1- el valor de la tarjeta elegida
+			duesVC.creditCardSelected = creditCardSelected
+			
+			
+		}
+		
+	}
+	
+}

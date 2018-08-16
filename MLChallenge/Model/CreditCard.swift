@@ -12,72 +12,77 @@ import Foundation
 
 /*
 Abstract: Un objeto que representa una tarjeta de crédito.
-*/
 
-/* Abstract:
-Un objeto preparado para recibir, mapear y almacenar (para usar cuando sea necesario) propiedades de las tarjetas de crédito.
-*/
+Una estructura preparada para recibir, mapear y almacenar (para usar cuando sea necesario) ciertas propiedades de las tarjetas de crédito.
 
-import Foundation
+Convierte el objeto JSON recibido en un array de diccionarios (Foundation)
+
+JSON -> Foundation
+
+*/
 
 struct CreditCard {
-	
 	
 	//*****************************************************************
 	// MARK: - Properties
 	//*****************************************************************
 	
-	// DATOS PROVISTOS POR EL SERVIDOR (API Mercado Pago) 👈
+	// propiedades preparadas para recibir, mapear y almacenar los valores deseados:
 	
+	// Tarjeta de crédito: 💳
+	// su id
 	var id: String
+	// su nombre
 	var name: String
+	//su logo
 	let thumb: String?
 	
 	//*****************************************************************
 	// MARK: - Initializers
 	//*****************************************************************
 	
-	// task: construir el objeto 'CreditCard' desde un diccionario (el JSON obtenido '[String:AnyObject]')
+	// task: construir un objeto Foundation (Dictionary<String:AnyObject>) 'CreditCard' desde el JSON obtenido.
+	
+	// inicializa la struct con un diccionario como parámetro requerido
 	init(dictionary: [String:AnyObject]) {
 		// id
-		id = dictionary["id"] as! String
+		// captura del Json obtenido el valor de la clave 'id' y la almancena en la propiedad 'id' del objeto 'CreditCard' 🔌
+		id = dictionary[MercadoPagoClient.CreditCard_JsonObject.JsonResponseKeys.CreditCardId] as! String
+		
 		// name
-		name = dictionary["name"] as! String
+		// captura del Json obtenido el valor de la clave 'name' y la almancena en la propiedad 'name' del objeto 'CreditCard' 🔌
+		name = dictionary[MercadoPagoClient.CreditCard_JsonObject.JsonResponseKeys.CreditCardName] as! String
+		
 		// thumb
-		thumb = dictionary["secure_thumbnail"] as! String
-		
-//		// name
-//		if let nameString = dictionary["name"] as? String {
-//			name = nameString
-//		} else {
-//			name = ""
-//		}
-//
-//		// thumb
-//		if let thumbtring = dictionary["thumb"] as? String {
-//			thumb = thumbtring
-//		} else {
-//			thumb = ""
-//		}
-		
-		
+		// captura del Json obtenido el valor de la clave 'secure_thumbnail' y la almancena en la propiedad 'thumb' del objeto 'CreditCard' 🔌
+		thumb = dictionary[MercadoPagoClient.CreditCard_JsonObject.JsonResponseKeys.Thumb] as! String
+	
 	}
 	
 	//*****************************************************************
 	// MARK: - Methods
 	//*****************************************************************
+
+	/**
+	task: transformar al resultado obtenido (array de objetos JSON) en un array de objetos Foundation 'CreditCard'
 	
-	// task: transformar al resultado obtenido (array de objetos JSON) en un array de objetos Foundation 'CreditCard'
-	static func creditCardsFromResults(_ results: [[String:AnyObject]]) -> [CreditCard] {
+	- parameter creditCardObjectsResult: el Json obtenido convertido a un array de diccionarios Foundation.
+	- returns: un array de objetos 'CreditCard' con sus propiedades ya rellenadas con los valores buscados.
+	*/
+	
+	static func creditCardsFromResults(_ creditCardObjectsResult: [[String:AnyObject]]) -> [CreditCard] {
 		
-		var creditCards = [CreditCard]()
+		// un array de 'CreditCard' listo para ser rellenado con los valores solicitados
+		var creditCardArray = [CreditCard]()
 		
-		// iterate through array of dictionaries, each Movie is a dictionary
-		for result in results {
-			creditCards.append(CreditCard(dictionary: result))
+		// itera el array de diccionarios, cada 'CreditCard' es un diccionario
+		for creditCard in creditCardObjectsResult {
+			// rellena el array de 'creditCardArray' con diccionario 'CreditCard'
+			creditCardArray.append(CreditCard(dictionary: creditCard))
 		}
 		
-		return creditCards
+		// un array de objetos 'CreditCard' con los valores correpondientes obtenidos y almacenados
+		return creditCardArray
 	}
 	
 }

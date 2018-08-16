@@ -11,11 +11,14 @@
 import UIKit
 
 
-class MasterViewController: UIViewController {
+class MasterViewController: UIViewController, UITextFieldDelegate {
 
 	//*****************************************************************
 	// MARK: - Properties
 	//*****************************************************************
+	
+	
+	let cashDelegate = CashTextFieldDelegate()
 	
 	// el monto ingresado por el usuario, capturado a través del text field
 	let amount: Double = Double()
@@ -24,7 +27,8 @@ class MasterViewController: UIViewController {
 	// MARK: - IBOutlets
 	//*****************************************************************
 	
-	@IBOutlet weak var okButton: UIButton!
+	@IBOutlet weak var nextButton: UIButton!
+	@IBOutlet weak var amountLabel: UILabel!
 	@IBOutlet weak var amountTextField: UITextField!
 	
 	
@@ -34,13 +38,16 @@ class MasterViewController: UIViewController {
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		//downloadDataFromAPI()
+		
+		
+		amountTextField.delegate = self.cashDelegate
+	
+	
 	}
 
 	override func viewWillAppear(_ animated: Bool) {
-		// TODO: una vez que vuelve de 'CuotasVc' llamar el método
-		// https://api.mercadopago.com/v1/payment_methods/installments?public_key=444a9ef5-8a6b-429f-abdf-587639155d88&amount=15&payment_method_id=visa&issuer.id=288
-		// para mostrar en un 'alert view' el 'recoomended_message'
+		
+		displayRecommendedMessage("Esta es una...", "prueba")
 	}
 	
 	//*****************************************************************
@@ -53,20 +60,49 @@ class MasterViewController: UIViewController {
 		// si es así, navegar hacia la siguiente pantalla
 	}
 	
+	@IBAction func textFieldEditingChanged(_ sender: UITextField) {
+		
+		debugPrint(sender.text)
+		
+	}
 	
-	// task: capturar el monto ingresado por el usuario
-	@IBAction func addAmount(_ sender: UITextField) {}
-
+	
+	
+	func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+		textField.resignFirstResponder()
+		
+		return true
+	}
+	
+	
 	
 	//*****************************************************************
-	// MARK: - Networking
+	// MARK: - Alert View
 	//*****************************************************************
+	/**
+	Muestra al usuario un mensaje acerca de cual ha sido el error en el su proceso de logueo.
 	
-	//TODO: una vez que el usuario ingresa todos los datos de pago, realizar una solicitud web para obtener, con esos datos, el 'recommend_message' adecuado. Usar los valores buscados en ese objeto, para contruir el 'alert view'
+	- Parameter title: El título del error.
+	- Parameter message: El mensaje acerca del error.
+	
+	*/
+	func displayRecommendedMessage(_ title: String?, _ message: String?) {
+		
+		// Reset UI
+		//		setUIEnabled(true)
+		//		stopAnimating()
+		
+		// Display Error in Alert Controller
+		let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
+		alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
+		self.present(alert, animated: true, completion: nil)
+	}
+	
+	
+	
 
 
 } // end class
-	
 	
 	
 

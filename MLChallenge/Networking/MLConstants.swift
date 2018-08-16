@@ -25,27 +25,19 @@ extension MercadoPagoClient {
 	//*****************************************************************
 	
 	// datos necesarios para realizar las diversas 'API calls'
-	
-	// provistos por el CLIENTE:
-	// https://api.mercadopago.com/v1/payment_methods/card_issuers?public_key=444a9ef5-8a6b-429f-abdf-587639155d88&payment_method_id=visa
-//	static let ApiURL = "https://private-d0cc1-iguanafixtest.apiary-mock.com/contacts"
-	
+
 	// URL components
 	static let ApiScheme = "https"
 	static let ApiHost = "api.mercadopago.com"
-	static let ApiPath = "/v1/payment_methods"
-	static let ApiPathCardIssues = "/v1/payment_methods/card_issuers"
+	static let ApiPath_PaymentMethods = "/v1/payment_methods"
+	static let ApiPath_CardIssues = "/v1/payment_methods/card_issuers"
+	static let ApiPath_Installments = "/v1/payment_methods/installments"
 	}
 	
 	//*****************************************************************
 	// MARK: - API Methods (Calls)
 	//*****************************************************************
-	
-	struct Methods {
-		
 
-	}
-	
 	
 	// MARK: URL Keys
 	struct URLKeys {
@@ -75,7 +67,9 @@ extension MercadoPagoClient {
 		static var PaymentMethod = ""
 		// el monto a pagar por el usuario
 		static var Amount = ""
-		// el banco elegido asociado a su tarjeta de crédito
+		// el nombre del banco elegido
+		static var BankName = ""
+		// el id del banco elegido asociado a su tarjeta de crédito
 		static var IssuerId = ""
 	}
 	
@@ -84,23 +78,41 @@ extension MercadoPagoClient {
 	//*****************************************************************
 	
 	// las claves para extraer los valores deseados de los objetos JSON recibidos
-	struct JSONResponseKeys {
+	
+	
+	// 1st ApiCall response
+	struct CreditCard_JsonObject {
 		
-		// para 'medio de pago' y 'banco'
-		static let CreditCardId = "id"
-		static let ThumbURL = "thumbnail"
+		struct  JsonResponseKeys {
+			static let CreditCardId = "id"
+			static let CreditCardName = "name"
+			static let Thumb = "secure_thumbnail"
+		}
+	
+	}
+	
+	// 2nd ApiCall response
+	struct Bank_JsonObject {
 		
-		// valores a extraer de 'recommend_message'
-		
-		// cantidad de cuotas
-		
-		// valor de cada cuota
-		
-		// monto final
-		
-		
+		struct  JsonResponseKeys {
+			static let BankId = "id"
+			static let BankName = "name"
+			static let Thumb = "secure_thumbnail"
+		}
 		
 	}
-}
+	
+	// 3rd ApiCall response
+	struct Installments_JsonObject {
+		
+		struct  JsonResponseKeys {
+			static let PayerCosts = "payer_costs"
+			static let RecommendMessage = "narecommended_messageme"
+		}
+		
+	}
+	
+
+} // end
 
 

@@ -35,7 +35,7 @@ class PayMethodViewController: UIViewController {
 	@IBOutlet weak var creditCardLabel: UILabel!
 	@IBOutlet weak var creditCardsTableView: UITableView!
 	@IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-	@IBOutlet weak var okButton: UIButton!
+	@IBOutlet weak var nextButton: UIButton!
 	
 	
 	//*****************************************************************
@@ -49,17 +49,11 @@ class PayMethodViewController: UIViewController {
 		// activity indicator
 		startActivityIndicator()
 		
+		userAmountLabel.text = "$ " + CashTextFieldDelegate.montoSeleccionado
+
+		
 		
 		}
-	
-	
-	
-	//*****************************************************************
-	// MARK: - Methods
-	//*****************************************************************
-	
-	
-	
 	
 	//*****************************************************************
 	// MARK: - Activity Indicator
@@ -82,7 +76,7 @@ class PayMethodViewController: UIViewController {
 	// task: obtener un array de diccionarios que representan los datos de contacto de diferentes usuarios
 	func startRequest(){
 
-		MercadoPagoClient.getPayMethods { (success, creditCards, error) in
+		MercadoPagoClient.getPayMethods { (success, creditCards, error) in // 📞
 			
 			debugPrint("😎\(success), \(creditCards), \(error)")
 			

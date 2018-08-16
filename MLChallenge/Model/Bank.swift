@@ -12,47 +12,51 @@ import Foundation
 
 /*
 Abstract: Un objeto que representa un banco.
+
+Una estructura preparada para recibir, mapear y almacenar (para usar cuando sea necesario) ciertas propiedades de los bancos.
+
+Convierte el objeto JSON recibido en un array de diccionarios (Foundation)
+
+JSON -> Foundation
 */
 
-import Foundation
 
 struct Bank {
-	
 	
 	//*****************************************************************
 	// MARK: - Properties
 	//*****************************************************************
+
+	// propiedades preparadas para recibir, mapear y almacenar los valores deseados:
 	
-	// DATOS PROVISTOS POR EL SERVIDOR (API Mercado Pago) 👈
-	
+	// Banco: 🏦
+	// su id
+	var id: String
+	// su nombre
 	var name: String
+	//su logo
 	let thumb: String?
 	
 	//*****************************************************************
 	// MARK: - Initializers
 	//*****************************************************************
 	
-	// task: construir el objeto 'CreditCard' desde un diccionario (el JSON obtenido '[String:AnyObject]')
+	// task: construir un objeto Foundation (Dictionary<String:AnyObject>) 'Bank' desde el JSON obtenido.
+	
+	// inicializa la struct con un diccionario como parámetro requerido
 	init(dictionary: [String:AnyObject]) {
+		
+		// id
+		// captura del Json obtenido el valor de la clave 'id' y la almancena en la propiedad 'id' del objeto 'Bank' 🔌
+		id = dictionary[MercadoPagoClient.Bank_JsonObject.JsonResponseKeys.BankId] as! String
+		
 		// name
-		name = dictionary["name"] as! String
+		// captura del Json obtenido el valor de la clave 'name' y la almancena en la propiedad 'name' del objeto 'Bank' 🔌
+		name = dictionary[MercadoPagoClient.Bank_JsonObject.JsonResponseKeys.BankName] as! String
+		
 		// thumb
-		thumb = dictionary["thumbnail"] as! String
-		
-		//		// name
-		//		if let nameString = dictionary["name"] as? String {
-		//			name = nameString
-		//		} else {
-		//			name = ""
-		//		}
-		//
-		//		// thumb
-		//		if let thumbtring = dictionary["thumb"] as? String {
-		//			thumb = thumbtring
-		//		} else {
-		//			thumb = ""
-		//		}
-		
+		// captura del Json obtenido el valor de la clave 'secure_thumbnail' y la almancena en la propiedad 'thumb' del objeto 'Bank' 🔌
+		thumb = dictionary[MercadoPagoClient.Bank_JsonObject.JsonResponseKeys.Thumb] as! String
 		
 	}
 	
@@ -60,17 +64,25 @@ struct Bank {
 	// MARK: - Methods
 	//*****************************************************************
 	
-	// task: transformar al resultado obtenido (array de objetos JSON) en un array de objetos Foundation 'Bank'
-	static func banksFromResults(_ results: [[String:AnyObject]]) -> [Bank] {
+	/**
+	task: transformar al resultado obtenido (array de objetos JSON) en un array de objetos Foundation 'Bank'
+	
+	- parameter bankObjectsResult: el Json obtenido convertido a un array de diccionarios Foundation.
+	- returns: un array de objetos 'Bank' con sus propiedades ya rellenadas con los valores buscados.
+	*/
+	
+	static func banksFromResults(_ bankObjectsResult: [[String:AnyObject]]) -> [Bank] {
 		
-		var banks = [Bank]()
+		// un array de 'Bank' listo para ser rellenado con los valores solicitados
+		var bankArray = [Bank]()
 		
-		// iterate through array of dictionaries, each Movie is a dictionary
-		for result in results {
-			banks.append(Bank(dictionary: result))
+		// itera el array de diccionarios, cada 'Bank' es un diccionario
+		for bank in bankObjectsResult {
+			bankArray.append(Bank(dictionary: bank))
 		}
 		
-		return banks
+		// un array de objetos 'Bank' con los valores correpondientes obtenidos y almacenados
+		return bankArray
 	}
 	
 }

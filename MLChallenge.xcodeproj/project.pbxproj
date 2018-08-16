@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A62D3969211B806900094689 /* RecommendMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A62D3968211B806900094689 /* RecommendMessage.swift */; };
+		A62D3969211B806900094689 /* Installments.swift in Sources */ = {isa = PBXBuildFile; fileRef = A62D3968211B806900094689 /* Installments.swift */; };
 		A63EFA3D2119547B006C6FF8 /* MLConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A63EFA3C2119547B006C6FF8 /* MLConstants.swift */; };
 		A65F34AE2113FA93008AF740 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65F34AD2113FA93008AF740 /* AppDelegate.swift */; };
 		A65F34B02113FA93008AF740 /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65F34AF2113FA93008AF740 /* MasterViewController.swift */; };
@@ -16,19 +16,20 @@
 		A65F34B82113FA95008AF740 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A65F34B62113FA95008AF740 /* LaunchScreen.storyboard */; };
 		A65F34C02113FC06008AF740 /* PayMethodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65F34BF2113FC06008AF740 /* PayMethodViewController.swift */; };
 		A65F34C22113FC25008AF740 /* BankViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65F34C12113FC25008AF740 /* BankViewController.swift */; };
-		A65F34C42113FCFB008AF740 /* DuesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65F34C32113FCFB008AF740 /* DuesViewController.swift */; };
+		A65F34C42113FCFB008AF740 /* InstallmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65F34C32113FCFB008AF740 /* InstallmentViewController.swift */; };
 		A672F407211A914F0008EB6A /* CreditCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A672F406211A914F0008EB6A /* CreditCard.swift */; };
 		A672F409211A91E50008EB6A /* Bank.swift in Sources */ = {isa = PBXBuildFile; fileRef = A672F408211A91E50008EB6A /* Bank.swift */; };
 		A69FA6722113FFD800A4E54E /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A69FA6712113FFD800A4E54E /* Alamofire.framework */; };
 		A69FA677211400DE00A4E54E /* UserDataPay.swift in Sources */ = {isa = PBXBuildFile; fileRef = A69FA676211400DE00A4E54E /* UserDataPay.swift */; };
 		A69FA67A2114011B00A4E54E /* MLClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A69FA6792114011B00A4E54E /* MLClient.swift */; };
+		A6CB7E0E21224A4100DD0F49 /* CashTextFieldDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6CB7E0D21224A4100DD0F49 /* CashTextFieldDelegate.swift */; };
 		B776654253AD43CCE1CBD79C /* Pods_MLChallenge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1B55661F66DEB9567DF1D0E /* Pods_MLChallenge.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		23938207716413110E915CF6 /* Pods-MLChallenge.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MLChallenge.release.xcconfig"; path = "Pods/Target Support Files/Pods-MLChallenge/Pods-MLChallenge.release.xcconfig"; sourceTree = "<group>"; };
 		A1B55661F66DEB9567DF1D0E /* Pods_MLChallenge.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MLChallenge.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		A62D3968211B806900094689 /* RecommendMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RecommendMessage.swift; path = MLChallenge/Model/RecommendMessage.swift; sourceTree = SOURCE_ROOT; };
+		A62D3968211B806900094689 /* Installments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Installments.swift; path = MLChallenge/Model/Installments.swift; sourceTree = SOURCE_ROOT; };
 		A63EFA3C2119547B006C6FF8 /* MLConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLConstants.swift; sourceTree = "<group>"; };
 		A65F34AA2113FA93008AF740 /* MLChallenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MLChallenge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A65F34AD2113FA93008AF740 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -39,13 +40,14 @@
 		A65F34B92113FA95008AF740 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A65F34BF2113FC06008AF740 /* PayMethodViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayMethodViewController.swift; sourceTree = "<group>"; };
 		A65F34C12113FC25008AF740 /* BankViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankViewController.swift; sourceTree = "<group>"; };
-		A65F34C32113FCFB008AF740 /* DuesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DuesViewController.swift; sourceTree = "<group>"; };
+		A65F34C32113FCFB008AF740 /* InstallmentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstallmentViewController.swift; sourceTree = "<group>"; };
 		A672F406211A914F0008EB6A /* CreditCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CreditCard.swift; path = MLChallenge/Model/CreditCard.swift; sourceTree = SOURCE_ROOT; };
 		A672F408211A91E50008EB6A /* Bank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Bank.swift; path = MLChallenge/Model/Bank.swift; sourceTree = SOURCE_ROOT; };
 		A69FA6712113FFD800A4E54E /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A69FA676211400DE00A4E54E /* UserDataPay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataPay.swift; sourceTree = "<group>"; };
 		A69FA6792114011B00A4E54E /* MLClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLClient.swift; sourceTree = "<group>"; };
 		A6AD2B0F211E65F700650D12 /* URLComponents.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = URLComponents.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		A6CB7E0D21224A4100DD0F49 /* CashTextFieldDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CashTextFieldDelegate.swift; sourceTree = "<group>"; };
 		C41CB1BDF1F6463920A83E07 /* Pods-MLChallenge.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MLChallenge.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MLChallenge/Pods-MLChallenge.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -117,7 +119,8 @@
 				A65F34AF2113FA93008AF740 /* MasterViewController.swift */,
 				A65F34BF2113FC06008AF740 /* PayMethodViewController.swift */,
 				A65F34C12113FC25008AF740 /* BankViewController.swift */,
-				A65F34C32113FCFB008AF740 /* DuesViewController.swift */,
+				A65F34C32113FCFB008AF740 /* InstallmentViewController.swift */,
+				A6CB7E0D21224A4100DD0F49 /* CashTextFieldDelegate.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -137,7 +140,7 @@
 				A69FA676211400DE00A4E54E /* UserDataPay.swift */,
 				A672F406211A914F0008EB6A /* CreditCard.swift */,
 				A672F408211A91E50008EB6A /* Bank.swift */,
-				A62D3968211B806900094689 /* RecommendMessage.swift */,
+				A62D3968211B806900094689 /* Installments.swift */,
 			);
 			name = Model;
 			path = "New Group";
@@ -274,10 +277,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A65F34C42113FCFB008AF740 /* DuesViewController.swift in Sources */,
+				A65F34C42113FCFB008AF740 /* InstallmentViewController.swift in Sources */,
+				A6CB7E0E21224A4100DD0F49 /* CashTextFieldDelegate.swift in Sources */,
 				A65F34C02113FC06008AF740 /* PayMethodViewController.swift in Sources */,
 				A63EFA3D2119547B006C6FF8 /* MLConstants.swift in Sources */,
-				A62D3969211B806900094689 /* RecommendMessage.swift in Sources */,
+				A62D3969211B806900094689 /* Installments.swift in Sources */,
 				A672F407211A914F0008EB6A /* CreditCard.swift in Sources */,
 				A65F34B02113FA93008AF740 /* MasterViewController.swift in Sources */,
 				A69FA677211400DE00A4E54E /* UserDataPay.swift in Sources */,
