@@ -25,6 +25,15 @@ class BankViewController: UIViewController {
 	var thumbailURLArray: Array<String> = []
 	
 	var creditCardSelected: String! // el valor de la tarjeta seleccionada enviado por 'PayMathodVC'
+	
+	// un array que contiene los diversos 'installments' disponibles
+	var installmentsArray = [Int]()
+	
+	// un array que contiene los diversos 'recommendMessage' disponibles
+	var recommendMessageArray = [String]()
+	
+	// un array que contiene los diversos 'totalAmount' disponibles
+	var totalAmountArray =  [Double]()
 
 	//*****************************************************************
 	// MARK: - IBOutlets
@@ -168,10 +177,51 @@ extension BankViewController: UITableViewDelegate {
 	
 	// task: almacenar el nombre del banco seleccionado para su posterior uso en la solicitud web
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		
+		// crea una variable para asignarle las propiedades del banco a la cada fila
 		let bank = allBanks[(indexPath as NSIndexPath).row]
-		debugPrint("los bancos: \(bank)")
+		// la propiedad 'name'
 		MercadoPagoClient.ParameterValues.BankName = bank.name
+		// y la propiedad 'id' (que servirá como valor de un item de la solcitud web)
 		MercadoPagoClient.ParameterValues.IssuerId = bank.id
+		
+		// MARK: networking: realizar la solicitud para obtener el  ´recommend_message' 🚀
+		MercadoPagoClient.getRecommendMessage { (success, installmentsObject, error) in
+				
+				if success {
+					
+					debugPrint("La solicitud del 'recommend_message' fue exitosa")
+					
+					if let installmentsObject = installmentsObject {
+						
+						debugPrint("🏦\(installmentsObject)")
+						
+						for item in installmentsObject {
+							
+							debugPrint("🤾🏼‍♂️\(item.payerCosts)")
+							
+							let payerCostsObjects = item.payerCosts
+							
+							for item in payerCostsObjects! {
+								
+								debugPrint("uuuuu\(item)")
+								
+								self.installmentsArray.append(item["installments"] as! Int)
+								debugPrint("🥁\(self.installmentsArray)")
+								
+							}
+						
+							
+							
+						}
+						
+						
+					}
+					
+				} // end if
+				
+		} // end network method
+		
 	}
 	
 	
@@ -190,10 +240,14 @@ extension BankViewController {
 		// si este vc tiene un segue con el identificador "toDuesVC"
 		if segue.identifier == "toDuesVC" {
 			
-			let duesVC = segue.destination as! InstallmentViewController
+			let installmentsVC = segue.destination as! InstallmentViewController
 			
 			// 1- el valor de la tarjeta elegida
-			duesVC.creditCardSelected = creditCardSelected
+			installmentsVC.creditCardSelected = creditCardSelected
+			// 2- el array
+//			installmentsVC.installmentsArray = installmentsArray
+//			
+//			print("🥅\(installmentsVC.installmentsArray = installmentsArray)")
 			
 			
 		}

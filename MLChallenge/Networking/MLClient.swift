@@ -179,34 +179,19 @@ class MercadoPagoClient: NSObject {
 
 			/* 3-Response 📦 */
 			// comprueba si se obtuvieron los objetos json (un array de objetos json)
-			if let recommendMessage_JSONObject = response.result.value {
+			if let installments_JSONObject = response.result.value {
 				
 				// test
-				debugPrint("Estos son los objetos JSON recibidos. Cada objeto (en realidad es sólo 1), contiene datos para calcular el valor de cada cuota, etc \(recommendMessage_JSONObject).")
+				debugPrint("Estos son los objetos JSON recibidos. Cada objeto (en realidad es sólo 1), contiene datos para calcular el valor de cada cuota, etc \(installments_JSONObject).")
 				
 				// usa los datos obtenidos en el Json para rellenar (mapeando) las propiedades del objeto 'Installments' !!!!!!!!!!!!!!!!!!!!! 👈👈👈
-				let resultsInstallments = Installments.installmentsFromResults(recommendMessage_JSONObject as! [[String: AnyObject]])
+				let resultsInstallments = Installments.installmentsFromResults(installments_JSONObject as! [[String: AnyObject]])
 				
-
-//				let resultsInstallments = Installments.installmentsFromResults(recommendMessage_JSONObject as! [[String:AnyObject]])
-//
 				// test
 				debugPrint("😆Este es el objeto JSON obtenido que representa a las cuotas convertido a un array de diccionarios Foundation LISTOS PARA USAR \(resultsInstallments).")
 
 				// completa el completion handler con los valores deseados ya listos para usar
 				completionHandlerForRecommendMessageObject(true, resultsInstallments, nil)
-
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
 
 			} // end if-let
 
@@ -215,11 +200,9 @@ class MercadoPagoClient: NSObject {
 	} // end func
 	
 	
-	// task: realiza una solicitud web donde envía la URL de la imagen y obtiene los datos de la misma
+	// task: realizar una solicitud web donde envía la URL de la imagen y obtiene los datos de la misma
 	static func taskForGETImage(_ thumbPath: String,completionHandlerForImage: @escaping (_ imageData: Data?, _ error: NSError?) -> Void) {
 
-		
-		//1.
 		Alamofire.request(thumbPath) .responseData { response in
 			
 			// check response status code
@@ -237,8 +220,6 @@ class MercadoPagoClient: NSObject {
 			// si se obtuvo el JSON exitosamente
 			if let thumbDataResponse = response.result.value {
 				debugPrint("XXX \(thumbDataResponse)")
-				// 3. almacena el resultado de la solicitud en la constante 'resultsContacts'
-				//let resultsCreditCards = CreditCard.creditCardsFromResults(jsonObjectResult as! [[String : AnyObject]])
 				completionHandlerForImage(thumbDataResponse , nil)
 				
 			} // end if-let

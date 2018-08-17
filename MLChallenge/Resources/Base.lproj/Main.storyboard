@@ -424,20 +424,20 @@
                         <viewLayoutGuide key="safeArea" id="KZP-qY-XuK"/>
                     </view>
                     <connections>
-                        <outlet property="amountLabel" destination="hwI-k2-15Q" id="Xdn-zE-q3k"/>
                         <outlet property="amountOfFees" destination="Fej-Z6-NY1" id="beF-3Y-HhH"/>
-                        <outlet property="bankLabel" destination="b1z-5l-ohq" id="zZq-gH-B5U"/>
-                        <outlet property="creditCardLabel" destination="kzE-bx-K1H" id="qYj-4r-x0c"/>
-                        <outlet property="installmentLabel" destination="ANa-bD-aWm" id="ULv-Ou-Dpp"/>
-                        <outlet property="installmentValueLabel" destination="lhM-BW-ds9" id="Grz-gl-OS0"/>
+                        <outlet property="bancoLabel" destination="b1z-5l-ohq" id="zZq-gH-B5U"/>
+                        <outlet property="bancoValorLabel" destination="9f8-CB-DlF" id="UE9-HW-Xre"/>
+                        <outlet property="cuotasLabel" destination="ANa-bD-aWm" id="ULv-Ou-Dpp"/>
+                        <outlet property="cuotasValorLabel" destination="Cnk-Ma-5vV" id="1TY-SZ-RfG"/>
+                        <outlet property="montoLabel" destination="hwI-k2-15Q" id="Xdn-zE-q3k"/>
+                        <outlet property="montoValorLabel" destination="qBk-Ho-dBB" id="8Se-GJ-JOP"/>
                         <outlet property="summaryButton" destination="8ny-9X-IiG" id="IYE-NX-aJg"/>
+                        <outlet property="tarjetaLabel" destination="kzE-bx-K1H" id="qYj-4r-x0c"/>
+                        <outlet property="tarjetaValorLabel" destination="gLP-he-URM" id="juX-fg-E54"/>
                         <outlet property="totalLabel" destination="1bH-PC-nI5" id="A39-fq-dht"/>
-                        <outlet property="userAmountLabel" destination="qBk-Ho-dBB" id="8Se-GJ-JOP"/>
-                        <outlet property="userBankLabel" destination="9f8-CB-DlF" id="UE9-HW-Xre"/>
-                        <outlet property="userCreditCardLabel" destination="gLP-he-URM" id="juX-fg-E54"/>
-                        <outlet property="userInstallmentLabel" destination="Cnk-Ma-5vV" id="1TY-SZ-RfG"/>
-                        <outlet property="userInstallmentValueLabel" destination="t3n-0f-t9M" id="jj5-g0-2Ui"/>
-                        <outlet property="userTotalAmount" destination="Zcj-3j-JJu" id="Yhu-h6-Afa"/>
+                        <outlet property="totalValorLabel" destination="Zcj-3j-JJu" id="Yhu-h6-Afa"/>
+                        <outlet property="valorCuotaLabel" destination="t3n-0f-t9M" id="UaP-bh-eP2"/>
+                        <outlet property="valorCuotaValorLabel" destination="t3n-0f-t9M" id="jj5-g0-2Ui"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="B5V-wV-afL" userLabel="First Responder" sceneMemberID="firstResponder"/>
