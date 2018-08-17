@@ -19,7 +19,6 @@
 		A65F34C42113FCFB008AF740 /* InstallmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65F34C32113FCFB008AF740 /* InstallmentViewController.swift */; };
 		A672F407211A914F0008EB6A /* CreditCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A672F406211A914F0008EB6A /* CreditCard.swift */; };
 		A672F409211A91E50008EB6A /* Bank.swift in Sources */ = {isa = PBXBuildFile; fileRef = A672F408211A91E50008EB6A /* Bank.swift */; };
-		A67DFD1A2125E6AD008F3D4D /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = A67DFD192125E6AD008F3D4D /* File.swift */; };
 		A69FA6722113FFD800A4E54E /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A69FA6712113FFD800A4E54E /* Alamofire.framework */; };
 		A69FA677211400DE00A4E54E /* UserDataPay.swift in Sources */ = {isa = PBXBuildFile; fileRef = A69FA676211400DE00A4E54E /* UserDataPay.swift */; };
 		A69FA67A2114011B00A4E54E /* MLClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A69FA6792114011B00A4E54E /* MLClient.swift */; };
@@ -44,7 +43,6 @@
 		A65F34C32113FCFB008AF740 /* InstallmentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstallmentViewController.swift; sourceTree = "<group>"; };
 		A672F406211A914F0008EB6A /* CreditCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CreditCard.swift; path = MLChallenge/Model/CreditCard.swift; sourceTree = SOURCE_ROOT; };
 		A672F408211A91E50008EB6A /* Bank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Bank.swift; path = MLChallenge/Model/Bank.swift; sourceTree = SOURCE_ROOT; };
-		A67DFD192125E6AD008F3D4D /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = File.swift; path = MLChallenge/Resources/File.swift; sourceTree = SOURCE_ROOT; };
 		A67DFD1B2126060D008F3D4D /* array.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = array.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		A69FA6712113FFD800A4E54E /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A69FA676211400DE00A4E54E /* UserDataPay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataPay.swift; sourceTree = "<group>"; };
@@ -144,7 +142,6 @@
 				A672F406211A914F0008EB6A /* CreditCard.swift */,
 				A672F408211A91E50008EB6A /* Bank.swift */,
 				A62D3968211B806900094689 /* Installments.swift */,
-				A67DFD192125E6AD008F3D4D /* File.swift */,
 			);
 			name = Model;
 			path = "New Group";
@@ -292,7 +289,6 @@
 				A69FA677211400DE00A4E54E /* UserDataPay.swift in Sources */,
 				A65F34C22113FC25008AF740 /* BankViewController.swift in Sources */,
 				A672F409211A91E50008EB6A /* Bank.swift in Sources */,
-				A67DFD1A2125E6AD008F3D4D /* File.swift in Sources */,
 				A65F34AE2113FA93008AF740 /* AppDelegate.swift in Sources */,
 				A69FA67A2114011B00A4E54E /* MLClient.swift in Sources */,
 			);

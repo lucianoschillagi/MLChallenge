@@ -47,8 +47,34 @@ class MasterViewController: UIViewController, UITextFieldDelegate {
 
 	override func viewWillAppear(_ animated: Bool) {
 		
-		displayRecommendedMessage("Esta es una...", "prueba")
+		displayRecommendedMessage("Resumen del pago:",configurarElAlertView() )
 	}
+	
+	//*****************************************************************
+	// MARK: - Methods
+	//*****************************************************************
+	
+	// task: configurar los datos a mostrar como resumen de la compra en el alert view
+	func configurarElAlertView() -> String {
+		
+		// monto
+		let monto = "MONTO: $" + CashTextFieldDelegate.montoSeleccionado
+		// tarjeta
+		let tarjeta = "TARJETA:" + PayMethodViewController.creditCardChoosen
+		// banco
+		let banco = "BANCO:" + MercadoPagoClient.ParameterValues.BankName
+		// cuotas
+		let cuotas = "CUOTAS:" + InstallmentViewController.almacenarCantidadDeCuotas
+		// valor de cada cuota
+		
+		// total
+		
+		let listaResumen = "\(monto) \n \(tarjeta) \n \(banco) \n \(cuotas)"
+		
+		return listaResumen
+	}
+
+	
 	
 	//*****************************************************************
 	// MARK: - IBActions
@@ -66,13 +92,16 @@ class MasterViewController: UIViewController, UITextFieldDelegate {
 		
 	}
 	
-	
-	
+
 	func textFieldShouldReturn(_ textField: UITextField) -> Bool {
 		textField.resignFirstResponder()
 		
 		return true
 	}
+	
+	
+	
+	
 	
 	
 	
@@ -91,6 +120,7 @@ class MasterViewController: UIViewController, UITextFieldDelegate {
 		// Reset UI
 		//		setUIEnabled(true)
 		//		stopAnimating()
+		//message = "MONTO: " + CashTextFieldDelegate.montoSeleccionado
 		
 		// Display Error in Alert Controller
 		let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
@@ -98,9 +128,6 @@ class MasterViewController: UIViewController, UITextFieldDelegate {
 		self.present(alert, animated: true, completion: nil)
 	}
 	
-	
-	
-
 
 } // end class
 	

@@ -23,7 +23,7 @@ class PayMethodViewController: UIViewController {
 	// las tarjetas de crédito aceptadas por Mercado Pago
 	var allCreditCards = [CreditCard]()
 	// la tarjeta de crédito seleccionada por el usuario
-	var creditCardChoosen: String = ""
+	static var creditCardChoosen: String = ""
 	
 	//*****************************************************************
 	// MARK: - IBOutlets
@@ -164,7 +164,7 @@ extension PayMethodViewController: UITableViewDelegate {
 		
 		
 		MercadoPagoClient.ParameterValues.PaymentMethod = creditCard.id // 🔌 👏
-		creditCardChoosen = creditCard.name // 🔌 👏
+		PayMethodViewController.creditCardChoosen = creditCard.name // 🔌 👏
 		
 		debugPrint("😅 \(MercadoPagoClient.ParameterValues.PaymentMethod)")
 	}
@@ -199,7 +199,7 @@ extension PayMethodViewController {
 			
 			// navegar hacia el 'BankViewController'
 				
-				bankVC.creditCardSelected = creditCardChoosen
+			bankVC.creditCardSelected = PayMethodViewController.creditCardChoosen
 				
 			
 

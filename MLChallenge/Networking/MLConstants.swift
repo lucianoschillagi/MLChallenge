@@ -12,7 +12,7 @@
 import Foundation
 
 /* Abstract:
-Almacena...
+Almacena valores a usar en las api calls.
 */
 
 extension MercadoPagoClient {
@@ -38,8 +38,6 @@ extension MercadoPagoClient {
 	// MARK: - API Methods (Calls)
 	//*****************************************************************
 
-	
-	// MARK: URL Keys
 	struct URLKeys {
 		static let UserID = "id"
 	}

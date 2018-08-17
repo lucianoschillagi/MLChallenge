@@ -23,6 +23,8 @@ class InstallmentViewController: UIViewController {
 	
 	static var installmentsArray : [Int] = []
 	
+	static var almacenarCantidadDeCuotas: String = ""
+	
 	
 	//*****************************************************************
 	// MARK: - IBOutlets
@@ -56,11 +58,6 @@ class InstallmentViewController: UIViewController {
 		// rellena el formulario de compra con los valores anteriormente ingresados por el usuario
 		printPartialValuesOfThePurchase()
 		
-		// networking
-		startRequest()
-		
-		
-		
 		// test
 		
 		
@@ -86,106 +83,6 @@ class InstallmentViewController: UIViewController {
 		bancoValorLabel.text = MercadoPagoClient.ParameterValues.BankName
 	}
 	
-	//*****************************************************************
-	// MARK: - IBActions
-	//*****************************************************************
-	
-	// task: una vez tapeado al botón ´summary´, llamar al método que muestra un alert view con un resúmen de los valores de la compra
-	@IBAction func summaryButtonPressed(_ sender: UIButton) {
-		
-		// network request 🚀
-		
-		// valores requeridos para pasar en la query de la solicitud web
-		// clave pública, LA TENGO
-		// monto, LO TENGO
-		// medio de pago, LO TENGO
-		// banco, LO TENGO
-		
-		
-		
-		
-		
-		
-		
-		
-	}
-	
-	//*****************************************************************
-	// MARK: - Networking
-	//*****************************************************************
-	
-	func startRequest(){
-		
-//		MercadoPagoClient.getRecommendMessage { (success, installmentsObject, error) in
-//			
-//			DispatchQueue.main.async {
-//				// si la solicitud fue exitosa...
-//				
-//				if success {
-//					
-//					if let installmentsObject = installmentsObject {
-//						
-//						// asigna los resultados del 'installment object' a la propiedad 'installmentsObject: [Installments]'
-//						self.installmentsArrayObject = installmentsObject // 🔌
-//						
-//						
-//						
-//						for item in self.installmentsArrayObject  {
-//							
-//							
-//							
-//							
-//							
-//						}
-//						
-//						
-//						
-//						
-//						
-//
-//					}
-//					
-//					
-//					// si el valor de la etiqueta donde el usuario pone la cantidad de cuotas es igual a 3
-//					// entonces mostrar el  'recommend message' y 'total amount' correspondientes (idem para las otras cantidad de cuotas)
-//					
-//					if self.cuotasValorLabel.text == "3" {
-//						
-//						debugPrint("el usuario está eligiendo 3 cuotas")
-//						//debugPrint("⚽️\(self.installmentsObject.installmentsArray[2])")
-//						
-//					}
-//				
-//				
-//				
-//				
-//				
-//				
-//				
-//				
-//				
-//				
-//				
-////				if success {
-////					// comprueba si hay valor dentro de 'installmentsObject'
-////					if let installmentsObject = installmentsObject {
-////						// asigna los resultados del 'installment object' al array 'payerCostsObject'
-////						self.installmentsObject = installmentsObject // 🔌
-////
-////						debugPrint("👹\(self.installmentsObject)")
-////					} // end optional binding
-//				
-//						
-//					} // end if
-//				
-//			} // end trailing closure
-//		} // end network method
-	} // end func
-	
-	
-	
-	
-	
 
 } // end class
 
@@ -210,6 +107,11 @@ extension InstallmentViewController: UIPickerViewDataSource, UIPickerViewDelegat
 	
 	func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
 		cuotasValorLabel.text = amountOfFeesModel[row]
+		// almacena el valor de la cuota elegida
+		InstallmentViewController.almacenarCantidadDeCuotas = amountOfFeesModel[row]
+		
+		
+		
 		//userDataPay.fees = amountOfFeesModel[row]
 		debugPrint("😅El usuario seleccionó \(amountOfFeesModel[row]) cuotas.")
 		// una vez que el usuario eligió la cantidad de cuotas, realizar una solicitud ('recommend_message') para calcular:
@@ -259,20 +161,10 @@ extension InstallmentViewController: UIPickerViewDataSource, UIPickerViewDelegat
 			// imprimir en la etiqueta 'cuotasValorLabel' el monto correspondiente de cada cuota
 			valorCuotaValorLabel.text = Installments.recommendMessageArray[4]
 			totalValorLabel.text = String(Installments.totalAmountArray[4])
-
-			
+	
 		}
-		
-		
-		
-		
-		
-		
+
 	}
-	
-	
-	
-	
 	
 	
 } // end ext
