@@ -107,7 +107,6 @@ struct Installments {
 		// un array de objetos 'Installments' con los valores correpondientes obtenidos y almacenados
 		return installmentsArray
 		
-		
 	}
 	
 	

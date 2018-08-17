@@ -106,6 +106,7 @@ extension MercadoPagoClient {
 		struct  JsonResponseKeys {
 			static let PayerCosts = "payer_costs"
 			static let RecommendMessage = "narecommended_messageme"
+			static let Installments = "installments"
 		}
 		
 	}

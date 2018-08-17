@@ -1,3 +1,4 @@
+
 //
 //  BancoViewController.swift
 //  MLChallenge
@@ -11,20 +12,22 @@
 import UIKit
 import Alamofire
 
+/* Abstract:
+Tercer pantalla donde el usuario elige el banco asociado a su tarjeta.
+*/
+
 class BankViewController: UIViewController {
-	
-	
+
 	//*****************************************************************
 	// MARK: - Properties
 	//*****************************************************************
-
 
 	var allBanks = [Bank]()
 	var jsonArray: NSArray?
 	var nameArray: Array<String> = []
 	var thumbailURLArray: Array<String> = []
 	
-	var creditCardSelected: String! // el valor de la tarjeta seleccionada enviado por 'PayMathodVC'
+	var creditCardSelected: String!
 	
 	// un array que contiene los diversos 'installments' disponibles
 	var installmentsArray = [Int]()
@@ -48,11 +51,6 @@ class BankViewController: UIViewController {
 	@IBOutlet weak var banksTableView: UITableView!
 	@IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 	
-	//*****************************************************************
-	// MARK: - Methods
-	//*****************************************************************
-
-	
 	
 	//*****************************************************************
 	// MARK: - VC Life Cycle
@@ -60,16 +58,14 @@ class BankViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 			
+				setUIEnabled(false)
+			
         startRequest()
 				startActivityIndicator()
 			
 			// imprime los valores parciales de la compra en las etiquetas correspondientes
 			creditCardChoosenLabel.text = creditCardSelected
-			amountChoosenLabel.text = "$ " + CashTextFieldDelegate.montoSeleccionado
-			debugPrint("la tarjeta seleccionada fue \(creditCardSelected)")
-			
-			
-			
+			amountChoosenLabel.text = "$ " + MasterViewController.montoSeleccionado
     }
 
 	//*****************************************************************
@@ -84,25 +80,17 @@ class BankViewController: UIViewController {
 				if success {
 					if let banks = banks {
 						self.allBanks = banks // 🔌 👏
+						debugPrint("Bancos disponibles: \(banks.count)")
+						
+						if banks.count == 0 {
+						self.displayAlertView("Atención", "Esta tarjeta no tiene bancos asociados")
+						
+						}
+						
 						self.banksTableView.reloadData()
 						self.stopActivityIndicator()
-						
-						// itera el array de [Bank] con los valores ya almacenados obtenidos
-						for bank in self.allBanks {
-							
-							//debugPrint("😛Los objetos de las tarjetas son: \(card)")
-							debugPrint("📦Los nombres de las bancos asocidados a la tarjeta elegida son: \(bank.name)")
-							//debugPrint("🏄🏻‍♂️Los thumb de las tarjetas aceptadas son: \(card.thumb)")
-							
-						}
-						debugPrint("La tarjeta elegida tiene \(banks.count) bancos asociados.")
 					}
-					
-					// detener el indicador de actividad en red
-					//self.stopActivityIndicator()
-				} else {
-					//self.displayAlertView(nil, error)
-				} // end if-else
+				}
 			} // end trailing closure
 		}
 	}
@@ -121,7 +109,21 @@ class BankViewController: UIViewController {
 		activityIndicator.stopAnimating()
 	}
 	
+	//*****************************************************************
+	// MARK: - Alert View
+	//*****************************************************************
+	/**
+	Muestra al usuario un mensaje acerca de cual ha sido el error en el su proceso de logueo.
 	
+	- Parameter title: El título del error.
+	- Parameter message: El mensaje acerca del error.
+	
+	*/
+	func displayAlertView(_ title: String?, _ message: String?) {
+		let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
+		alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
+		self.present(alert, animated: true, completion: nil)
+	}
 
 } // end class
 
@@ -149,8 +151,6 @@ extension BankViewController: UITableViewDataSource {
 		debugPrint("los nombres de los bancos son \(bank.name)")
 		cell?.imageView!.contentMode = UIView.ContentMode.scaleAspectFit
 		
-		
-		
 		if let thumbPath = bank.thumb {
 			debugPrint("🗿\(thumbPath)")
 			// realiza la solicitud para obtener la imágen
@@ -166,12 +166,33 @@ extension BankViewController: UITableViewDataSource {
 				}
 			}
 			
-		} // end conditional binding
+		} // end optional binding
 		
 		return cell!
 		
 	}
+	
+	//*****************************************************************
+	// MARK: - UI Enabled-Disabled
+	//*****************************************************************
+	
+	// task: habilitar o deshabilitar la UI de acuerdo a la lógica de la aplicación
+	func setUIEnabled(_ enabled: Bool) {
+		nextButton.isEnabled = enabled
+		
+		// adjust login button alpha
+		if enabled {
+			nextButton.alpha = 1.0
+		} else {
+			nextButton.alpha = 0.5
+		}
+	}
+	
 }
+
+//*****************************************************************
+// MARK: - Table View Delegate Methods
+//*****************************************************************
 
 extension BankViewController: UITableViewDelegate {
 	
@@ -180,49 +201,39 @@ extension BankViewController: UITableViewDelegate {
 		
 		// crea una variable para asignarle las propiedades del banco a la cada fila
 		let bank = allBanks[(indexPath as NSIndexPath).row]
+		
+		// almancena el nombre y el id del banco en las propiedades 'BankName' y 'IssuerId'
 		// la propiedad 'name'
 		MercadoPagoClient.ParameterValues.BankName = bank.name
 		// y la propiedad 'id' (que servirá como valor de un item de la solcitud web)
 		MercadoPagoClient.ParameterValues.IssuerId = bank.id
 		
-		// MARK: networking: realizar la solicitud para obtener el  ´recommend_message' 🚀
+		// MARK: networking: realizar la solicitud para obtener el ´recommend_message' 🚀
 		MercadoPagoClient.getRecommendMessage { (success, installmentsObject, error) in
-				
+			
+				// si la solicitud es exitosa
 				if success {
-					
-					debugPrint("La solicitud del 'recommend_message' fue exitosa")
 					
 					if let installmentsObject = installmentsObject {
 						
-						debugPrint("🏦\(installmentsObject)")
-						
 						for item in installmentsObject {
-							
-							debugPrint("🤾🏼‍♂️\(item.payerCosts)")
-							
 							let payerCostsObjects = item.payerCosts
 							
 							for item in payerCostsObjects! {
-								
-								debugPrint("uuuuu\(item)")
-								
-								self.installmentsArray.append(item["installments"] as! Int)
-								debugPrint("🥁\(self.installmentsArray)")
-								
+								self.installmentsArray.append(item[MercadoPagoClient.Installments_JsonObject.JsonResponseKeys.Installments] as! Int)
 							}
+
+						} // end for-in
 						
-							
-							
-						}
-						
-						
-					}
+					} // end optional binding
+					
+					self.setUIEnabled(true)
 					
 				} // end if
 				
 		} // end network method
-		
-	}
+	
+	} // end method
 	
 	
 } // end ext
@@ -241,15 +252,8 @@ extension BankViewController {
 		if segue.identifier == "toDuesVC" {
 			
 			let installmentsVC = segue.destination as! InstallmentViewController
-			
-			// 1- el valor de la tarjeta elegida
 			installmentsVC.creditCardSelected = creditCardSelected
-			// 2- el array
-//			installmentsVC.installmentsArray = installmentsArray
-//			
-//			print("🥅\(installmentsVC.installmentsArray = installmentsArray)")
-			
-			
+
 		}
 		
 	}

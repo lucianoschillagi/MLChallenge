@@ -23,8 +23,11 @@ class InstallmentViewController: UIViewController {
 	
 	static var installmentsArray : [Int] = []
 	
-	static var almacenarCantidadDeCuotas: String = ""
+	static var amountOfFees: String = ""
 	
+	static var feeValue: String = ""
+	
+	static var total: String = ""
 	
 	//*****************************************************************
 	// MARK: - IBOutlets
@@ -55,23 +58,13 @@ class InstallmentViewController: UIViewController {
 	override func viewDidLoad() {
         super.viewDidLoad()
 		
+		setUIEnabled(false)
+
 		// rellena el formulario de compra con los valores anteriormente ingresados por el usuario
 		printPartialValuesOfThePurchase()
-		
-		// test
-		
-		
-		debugPrint("el array de cuotas disponibles es este: \(Installments.installmentsArray)")
-		debugPrint("el array de recomend messages disponibles es este: \(Installments.recommendMessageArray)")
-		debugPrint("el array de los total amount disponibles es este: \(Installments.totalAmountArray)")
-		
-		debugPrint("el segundo elementos de los recommend message es: \(Installments.recommendMessageArray[1])")
-	
-		
 	}
 	
-	//print partial values of the purchase
-	
+
 	//*****************************************************************
 	// MARK: - Methods
 	//*****************************************************************
@@ -79,16 +72,32 @@ class InstallmentViewController: UIViewController {
 	// task: imprimir los valores parciales de la compra en las etiquetas correspondientes
 	func printPartialValuesOfThePurchase() {
 		tarjetaValorLabel.text = creditCardSelected
-		montoValorLabel.text = CashTextFieldDelegate.montoSeleccionado
+		montoValorLabel.text = MasterViewController.montoSeleccionado
 		bancoValorLabel.text = MercadoPagoClient.ParameterValues.BankName
 	}
 	
+	//*****************************************************************
+	// MARK: - UI Enabled-Disabled
+	//*****************************************************************
+	
+	// task: habilitar o deshabilitar la UI de acuerdo a la lógica de la aplicación
+	func setUIEnabled(_ enabled: Bool) {
+		summaryButton.isEnabled = enabled
+		
+		// adjust login button alpha
+		if enabled {
+			summaryButton.alpha = 1.0
+		} else {
+			summaryButton.alpha = 0.5
+		}
+	}
+
 
 } // end class
 
 
 //*****************************************************************
-// MARK: - Picker View Methods
+// MARK: - Picker View Methods (Data Source & Delegate)
 //****************************************************************
 
 extension InstallmentViewController: UIPickerViewDataSource, UIPickerViewDelegate {
@@ -108,15 +117,7 @@ extension InstallmentViewController: UIPickerViewDataSource, UIPickerViewDelegat
 	func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
 		cuotasValorLabel.text = amountOfFeesModel[row]
 		// almacena el valor de la cuota elegida
-		InstallmentViewController.almacenarCantidadDeCuotas = amountOfFeesModel[row]
-		
-		
-		
-		//userDataPay.fees = amountOfFeesModel[row]
-		debugPrint("😅El usuario seleccionó \(amountOfFeesModel[row]) cuotas.")
-		// una vez que el usuario eligió la cantidad de cuotas, realizar una solicitud ('recommend_message') para calcular:
-		// 1- el monto de cada cuota (de acuerdo a la cantidad de cuotas elegidas)
-		// 2- el monto total a pagar
+		InstallmentViewController.amountOfFees = amountOfFeesModel[row]
 		
 		// si el usuario seleccionó 0 cuotas
 		if amountOfFeesModel[row] == "0" {
@@ -124,6 +125,8 @@ extension InstallmentViewController: UIPickerViewDataSource, UIPickerViewDelegat
 			// imprimir en la etiqueta 'cuotasValorLabel' el monto correspondiente de cada cuota
 			valorCuotaValorLabel.text = Installments.recommendMessageArray[0]
 			totalValorLabel.text = String(Installments.totalAmountArray[0])
+			InstallmentViewController.feeValue = valorCuotaValorLabel.text!
+			InstallmentViewController.total = totalValorLabel.text!
 			
 		}
 		
@@ -133,6 +136,8 @@ extension InstallmentViewController: UIPickerViewDataSource, UIPickerViewDelegat
 			// imprimir en la etiqueta 'cuotasValorLabel' el monto correspondiente de cada cuota
 			valorCuotaValorLabel.text = Installments.recommendMessageArray[1]
 			totalValorLabel.text = String(Installments.totalAmountArray[1])
+			InstallmentViewController.feeValue = valorCuotaValorLabel.text!
+			InstallmentViewController.total = totalValorLabel.text!
 		}
 		
 		// si el usuario seleccionó 6 cuotas
@@ -141,8 +146,8 @@ extension InstallmentViewController: UIPickerViewDataSource, UIPickerViewDelegat
 			// imprimir en la etiqueta 'cuotasValorLabel' el monto correspondiente de cada cuota
 			valorCuotaValorLabel.text = Installments.recommendMessageArray[2]
 			totalValorLabel.text = String(Installments.totalAmountArray[2])
-
-			
+			InstallmentViewController.feeValue = valorCuotaValorLabel.text!
+			InstallmentViewController.total = totalValorLabel.text!
 		}
 		
 		// si el usuario seleccionó 9 cuotas
@@ -151,8 +156,8 @@ extension InstallmentViewController: UIPickerViewDataSource, UIPickerViewDelegat
 			// imprimir en la etiqueta 'cuotasValorLabel' el monto correspondiente de cada cuota
 			valorCuotaValorLabel.text = Installments.recommendMessageArray[3]
 			totalValorLabel.text = String(Installments.totalAmountArray[3])
-
-			
+			InstallmentViewController.feeValue = valorCuotaValorLabel.text!
+			InstallmentViewController.total = totalValorLabel.text!
 		}
 		
 		// si el usuario seleccionó 12 cuotas
@@ -161,8 +166,11 @@ extension InstallmentViewController: UIPickerViewDataSource, UIPickerViewDelegat
 			// imprimir en la etiqueta 'cuotasValorLabel' el monto correspondiente de cada cuota
 			valorCuotaValorLabel.text = Installments.recommendMessageArray[4]
 			totalValorLabel.text = String(Installments.totalAmountArray[4])
-	
+			InstallmentViewController.feeValue = valorCuotaValorLabel.text!
+			InstallmentViewController.total = totalValorLabel.text!
 		}
+		
+		setUIEnabled(true)
 
 	}
 	

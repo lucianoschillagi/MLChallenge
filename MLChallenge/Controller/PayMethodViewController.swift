@@ -10,6 +10,10 @@
 
 import UIKit
 
+/* Abstract:
+Segunda pantalla donde el usuario elige con qué tarjeta pagar.
+*/
+
 class PayMethodViewController: UIViewController {
 
 	//*****************************************************************
@@ -29,7 +33,6 @@ class PayMethodViewController: UIViewController {
 	// MARK: - IBOutlets
 	//*****************************************************************
 	
-
 	@IBOutlet weak var amountLabel: UILabel!
 	@IBOutlet weak var userAmountLabel: UILabel!
 	@IBOutlet weak var creditCardLabel: UILabel!
@@ -37,23 +40,21 @@ class PayMethodViewController: UIViewController {
 	@IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 	@IBOutlet weak var nextButton: UIButton!
 	
-	
 	//*****************************************************************
 	// MARK: - VC Life Cycle
 	//*****************************************************************
 	override func viewDidLoad() {
         super.viewDidLoad()
 		
+		setUIEnabled(false)
 		// networking 🚀
 		startRequest()
 		// activity indicator
 		startActivityIndicator()
 		
-		userAmountLabel.text = "$ " + CashTextFieldDelegate.montoSeleccionado
+		userAmountLabel.text = "$ " + MasterViewController.montoSeleccionado
 
-		
-		
-		}
+	}
 	
 	//*****************************************************************
 	// MARK: - Activity Indicator
@@ -68,7 +69,7 @@ class PayMethodViewController: UIViewController {
 		activityIndicator.alpha = 0.0
 		self.activityIndicator.stopAnimating()
 	}
-	
+
 	//*****************************************************************
 	// MARK: - Networking
 	//*****************************************************************
@@ -97,12 +98,25 @@ class PayMethodViewController: UIViewController {
 			
 					}
 					
-					// detener el indicador de actividad en red
-					//self.stopActivityIndicator()
 				} else {
-					//self.displayAlertView(nil, error)
+				
 				}
 			} // end trailing closure
+			
+		}
+	}
+	
+	//*****************************************************************
+	// MARK: - UI Enabled-Disabled
+	//*****************************************************************
+	
+	// task: habilitar o deshabilitar la UI de acuerdo a la lógica de la aplicación
+	func setUIEnabled(_ enabled: Bool) {
+		nextButton.isEnabled = enabled
+		if enabled {
+			nextButton.alpha = 1.0
+		} else {
+			nextButton.alpha = 0.5
 		}
 	}
 	
@@ -110,11 +124,12 @@ class PayMethodViewController: UIViewController {
 	
 
 //*****************************************************************
-// MARK: - Table View Delegate Methods
+// MARK: - Table View Data Source Methods
 //*****************************************************************
 
 extension PayMethodViewController: UITableViewDataSource {
 	
+	// task: determinar cuantas filas tendrá la tabla
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		debugPrint("la tabla de las tarjetas de crédito tiene \(allCreditCards.count) filas.")
 		return allCreditCards.count
@@ -126,19 +141,15 @@ extension PayMethodViewController: UITableViewDataSource {
 		let cellReuseId = "cell"
 		let creditCard = allCreditCards[(indexPath as NSIndexPath).row]
 		let cell = tableView.dequeueReusableCell(withIdentifier: cellReuseId, for: indexPath) as UITableViewCell!
-		
 		cell?.textLabel?.text = creditCard.name
 		cell?.imageView!.contentMode = UIView.ContentMode.scaleAspectFit
 
-		
-	
+
 		if let thumbPath = creditCard.thumb {
-			debugPrint("🗿\(thumbPath)")
 			// realiza la solicitud para obtener la imágen
 			let _ = MercadoPagoClient.taskForGETImage(thumbPath) { (imageData, error) in
-				debugPrint("🎲\(imageData)")
 				if let image = UIImage(data:imageData!) {
-					debugPrint("😎\(image)")
+
 					DispatchQueue.main.async {
 						cell?.imageView?.image = image
 					}
@@ -147,7 +158,7 @@ extension PayMethodViewController: UITableViewDataSource {
 					}
 				}
 				
-			} // end conditional binding
+			} // end optional binding
 		
 		return cell!
 		
@@ -156,23 +167,25 @@ extension PayMethodViewController: UITableViewDataSource {
 } // end class
 
 
+//*****************************************************************
+// MARK: - Table View Delegate Methods
+//*****************************************************************
+
 extension PayMethodViewController: UITableViewDelegate {
 	
 	// task: almacenar el nombre de la tarjeta seleccionada para su posterior uso en la solicitud web
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		
 		let creditCard = allCreditCards[(indexPath as NSIndexPath).row]
-		
-		
 		MercadoPagoClient.ParameterValues.PaymentMethod = creditCard.id // 🔌 👏
 		PayMethodViewController.creditCardChoosen = creditCard.name // 🔌 👏
 		
-		debugPrint("😅 \(MercadoPagoClient.ParameterValues.PaymentMethod)")
+		setUIEnabled(true)
 	}
 	
 } // end ext
 
-	
-	
+
 //*****************************************************************
 // MARK: - Navigation (Segue)
 //*****************************************************************
@@ -184,29 +197,11 @@ extension PayMethodViewController {
 		
 		// si este vc tiene un segue con el identificador "toBankVC"
 		if segue.identifier == "toBankVC" {
-			
-		let bankVC = segue.destination as! BankViewController
-			
-			// le pasa a 'BankViewController' los siguientes datos: ///////////////////////////////
-			
-			/*
-			1- el valor de la tarjeta elegida
-			*/
-		
-			
-				
-				// caso contrario, pasar el nombre de la tarjeta seleccionada al vc siguiente
-			
-			// navegar hacia el 'BankViewController'
-				
+			let bankVC = segue.destination as! BankViewController
 			bankVC.creditCardSelected = PayMethodViewController.creditCardChoosen
-				
-			
 
-			}
-		
 		}
-	
+	}
 }
 
 
