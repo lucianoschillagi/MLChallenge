@@ -37,6 +37,11 @@ class BankViewController: UIViewController {
 	
 	// un array que contiene los diversos 'totalAmount' disponibles
 	var totalAmountArray =  [Double]()
+	
+	// esconde la barra de estado
+	override var prefersStatusBarHidden: Bool {
+		return true
+	}
 
 	//*****************************************************************
 	// MARK: - IBOutlets

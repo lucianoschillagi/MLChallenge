@@ -25,6 +25,9 @@ class MasterViewController: UIViewController {
 	
 	static var montoSeleccionado: String = ""
 	
+	// esconde la barra de estado
+	override var prefersStatusBarHidden: Bool { return true }
+	
 	//*****************************************************************
 	// MARK: - IBOutlets
 	//*****************************************************************

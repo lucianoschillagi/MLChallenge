@@ -29,6 +29,11 @@ class InstallmentViewController: UIViewController {
 	
 	static var total: String = ""
 	
+	// esconde la barra de estado
+	override var prefersStatusBarHidden: Bool {
+		return true
+	}
+	
 	//*****************************************************************
 	// MARK: - IBOutlets
 	//*****************************************************************

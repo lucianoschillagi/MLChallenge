@@ -29,6 +29,11 @@ class PayMethodViewController: UIViewController {
 	// la tarjeta de crédito seleccionada por el usuario
 	static var creditCardChoosen: String = ""
 	
+	// esconde la barra de estado
+	override var prefersStatusBarHidden: Bool {
+		return true
+	}
+	
 	//*****************************************************************
 	// MARK: - IBOutlets
 	//*****************************************************************
