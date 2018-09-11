@@ -16,7 +16,7 @@ Finalmente, luego de introducir estos datos, se le presentará un mensaje con el
 
 * Swift
 * UIKit
-* Web Services
+* Web Services (Mercado Libre API)
 * MVC
 
 ### Testing The App:
