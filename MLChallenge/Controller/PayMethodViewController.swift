@@ -21,8 +21,8 @@ class PayMethodViewController: UIViewController {
 	//*****************************************************************
 	
 	var jsonArray: NSArray?
-	var nameArray: Array<String> = []
-	var thumbailURLArray: Array<String> = []
+	var nameArray: [String] = []
+	var thumbailURLArray: [String] = []
 	
 	// las tarjetas de crédito aceptadas por Mercado Pago
 	var allCreditCards = [CreditCard]()

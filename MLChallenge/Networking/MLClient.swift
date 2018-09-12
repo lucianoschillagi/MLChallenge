@@ -147,7 +147,7 @@ class MercadoPagoClient: NSObject {
 	// task: realiza una solicitud web para obtener el 'recommend_message'
 	static func getRecommendMessage(_ completionHandlerForRecommendMessageObject: @escaping ( _ success: Bool, _ recommendMessage: [Installments]?, _  errorString: String?) -> Void) {
 		
-			//https://api.mercadopago.com/v1/payment_methods/installments?public_key=444a9ef5-8a6b-429f-abdf-587639155d88&amount=15&payment_method_id=visa&issuer.id=288
+			//https://api.themoviedb.org/3/movie/upcoming?api_key=0942529e191d0558f888245403b4dca7&language=en-US&page=1
 
 		/* 1-Create URL ✒️ */
 		var components = URLComponents()
