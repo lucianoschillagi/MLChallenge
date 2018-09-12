@@ -1,27 +1,49 @@
-## Payment Flow
+# Payment Flow
 
-### Summary:
-Payment Flow es un aplicación que emula el flujo de un pago. 
+**Payment Flow** is an app that emulates the flow of a payment.
 
-Para realizar este pago, el usuario debe introducir los siguientes datos:
+## Getting Started
 
-1. el monto a pagar
-2. la tarjeta de crédito con la que pagará
-3. el banco asociado a esa tarjeta
-4. la cantidad de cuotas
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
-Finalmente, luego de introducir estos datos, se le presentará un mensaje con el resúmen de su pago.
+### Prerequisites
 
-### Technologies Used In Application:
+What things you need to install the software and how to install them
 
-* Swift
-* UIKit
-* Web Services (Mercado Libre API)
-* MVC
+```
+Xcode 10, Simulator 10.0
+```
 
-### Testing The App:
+### Testing The App
 
 * Download the project to your computer from this project page.
 * Once the project is downloaded, open the .xcworkspace file from the folder.
 * Run the project either using the iPhone simulator or your device. I recommend running the project on the latest iPhone device. It should be compiled with the latest version of Xcode.
 * If you choose to download it on your device, please plug in your device to your computer and make the device target your device model. Then click 'run'.
+
+## Expected User Experience
+
+In order to realize this payment, the user must enter the following data:
+
+1. Amount to be paid
+2. The credit card with which you will pay
+3. The bank associated with that card
+4. The amount of installments
+
+Finally, after entering the data, you will receive a message with the summary of your payment.
+
+## Built With
+
+* [Swift 4](https://developer.apple.com/swift/) - The Programming Language used
+* [Alamofire](https://github.com/Alamofire/Alamofire) - The Networking Library used
+* [UIKit](https://developer.apple.com/documentation/uikit) - The App Framework used
+
+## Author
+
+* **Luciano Schillagi** - *Initial work* - [LucianoSchillagi](https://github.com/lucianoschillagi)
+
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+
