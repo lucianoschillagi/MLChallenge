@@ -11,7 +11,7 @@ These instructions will get you a copy of the project up and running on your loc
 What things you need to install the software and how to install them
 
 ```
-Xcode 10, Simulator 10
+Xcode 10, Simulator 10.0
 ```
 
 ### Testing The App
@@ -35,8 +35,9 @@ Finally, after entering the data, you will receive a message with the summary of
 ## Built With
 
 * [Swift 4](https://developer.apple.com/swift/) - The Programming Language used
-* [Alamofire](https://github.com/Alamofire/Alamofire) - The Networking Library used
 * [UIKit](https://developer.apple.com/documentation/uikit) - The App Framework used
+* [Alamofire](https://github.com/Alamofire/Alamofire) - The Networking Library used
+* [Mercado Libre API](https://developers.mercadolibre.com.ar/) - The API used
 
 ## Author
 
@@ -45,5 +46,5 @@ Finally, after entering the data, you will receive a message with the summary of
 
 ## License
 
-This project is licensed under the MIT License - see the [License.md](License.md) file for details
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
 
