@@ -146,8 +146,6 @@ class MercadoPagoClient: NSObject {
 	
 	// task: realiza una solicitud web para obtener el 'recommend_message'
 	static func getRecommendMessage(_ completionHandlerForRecommendMessageObject: @escaping ( _ success: Bool, _ recommendMessage: [Installments]?, _  errorString: String?) -> Void) {
-		
-			//https://api.themoviedb.org/3/movie/upcoming?api_key=0942529e191d0558f888245403b4dca7&language=en-US&page=1
 
 		/* 1-Create URL ✒️ */
 		var components = URLComponents()
@@ -211,7 +209,7 @@ class MercadoPagoClient: NSObject {
 				case 200:
 					print("👏example success")
 				default:
-					let errorMessage = "🏋🏻‍♂️error with response status: \(status)"
+					_ = "🏋🏻‍♂️error with response status: \(status)"
 				}
 			}
 			

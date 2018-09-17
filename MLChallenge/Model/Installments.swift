@@ -56,7 +56,7 @@ struct Installments {
 	init(dictionary: [String:AnyObject]) {
 	
 		// extrae el valor al que apunta la clave "payer_costs", en este caso un array de diccionarios ('Array<[String:AnyObject]>')
-		payerCosts = dictionary["payer_costs"] as! [[String:AnyObject]]
+		payerCosts = dictionary["payer_costs"] as? [[String:AnyObject]]
 
 		
 		// comprueba si la clave "payer_costs" contiene algún valor

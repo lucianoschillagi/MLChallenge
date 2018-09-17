@@ -77,7 +77,6 @@ extension MercadoPagoClient {
 	
 	// las claves para extraer los valores deseados de los objetos JSON recibidos
 	
-	
 	// 1st ApiCall response
 	struct CreditCard_JsonObject {
 		

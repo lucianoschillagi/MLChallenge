@@ -84,7 +84,7 @@ class PayMethodViewController: UIViewController {
 
 		MercadoPagoClient.getPayMethods { (success, creditCards, error) in // 📞
 			
-			debugPrint("😎\(success), \(creditCards), \(error)")
+			debugPrint("😎\(success), \(String(describing: creditCards)), \(String(describing: error))")
 			
 			DispatchQueue.main.async {
 				// si la solicitud fue exitosa...
@@ -97,9 +97,7 @@ class PayMethodViewController: UIViewController {
 						for card in self.allCreditCards {
 							debugPrint("🎲Los thumbs de las tarjetas aceptadas son: \(card)")
 							debugPrint("🏄🏻‍♂️Los thumb de las tarjetas aceptadas son: \(card.thumb)")
-
 						}
-						debugPrint("Mercado Pago acepta \(creditCards.count) tarjetas de crédito.")
 			
 					}
 					
@@ -145,9 +143,9 @@ extension PayMethodViewController: UITableViewDataSource {
 		
 		let cellReuseId = "cell"
 		let creditCard = allCreditCards[(indexPath as NSIndexPath).row]
-		let cell = tableView.dequeueReusableCell(withIdentifier: cellReuseId, for: indexPath) as UITableViewCell!
-		cell?.textLabel?.text = creditCard.name
-		cell?.imageView!.contentMode = UIView.ContentMode.scaleAspectFit
+		let cell = tableView.dequeueReusableCell(withIdentifier: cellReuseId, for: indexPath) as UITableViewCell
+		cell.textLabel?.text = creditCard.name
+		cell.imageView!.contentMode = UIView.ContentMode.scaleAspectFit
 
 
 		if let thumbPath = creditCard.thumb {
@@ -156,7 +154,7 @@ extension PayMethodViewController: UITableViewDataSource {
 				if let image = UIImage(data:imageData!) {
 
 					DispatchQueue.main.async {
-						cell?.imageView?.image = image
+						cell.imageView?.image = image
 					}
 				} else {
 					print(error ?? "empty error")
@@ -165,7 +163,7 @@ extension PayMethodViewController: UITableViewDataSource {
 				
 			} // end optional binding
 		
-		return cell!
+		return cell
 		
 		}
 	

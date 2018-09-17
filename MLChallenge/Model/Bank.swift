@@ -56,7 +56,7 @@ struct Bank {
 		
 		// thumb
 		// captura del Json obtenido el valor de la clave 'secure_thumbnail' y la almancena en la propiedad 'thumb' del objeto 'Bank' 🔌
-		thumb = dictionary[MercadoPagoClient.Bank_JsonObject.JsonResponseKeys.Thumb] as! String
+		thumb = dictionary[MercadoPagoClient.Bank_JsonObject.JsonResponseKeys.Thumb] as? String
 		
 	}
 	

@@ -55,7 +55,7 @@ struct CreditCard {
 		
 		// thumb
 		// captura del Json obtenido el valor de la clave 'secure_thumbnail' y la almancena en la propiedad 'thumb' del objeto 'CreditCard' 🔌
-		thumb = dictionary[MercadoPagoClient.CreditCard_JsonObject.JsonResponseKeys.Thumb] as! String
+		thumb = dictionary[MercadoPagoClient.CreditCard_JsonObject.JsonResponseKeys.Thumb] as? String
 	
 	}
 	

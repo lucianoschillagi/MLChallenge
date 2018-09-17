@@ -39,9 +39,7 @@ class BankViewController: UIViewController {
 	var totalAmountArray =  [Double]()
 	
 	// esconde la barra de estado
-	override var prefersStatusBarHidden: Bool {
-		return true
-	}
+	override var prefersStatusBarHidden: Bool { return true }
 
 	//*****************************************************************
 	// MARK: - IBOutlets
@@ -52,7 +50,6 @@ class BankViewController: UIViewController {
 	@IBOutlet weak var creditCardLabel: UILabel!
 	@IBOutlet weak var creditCardChoosenLabel: UILabel!
 	@IBOutlet weak var nextButton: UIButton!
-	
 	@IBOutlet weak var banksTableView: UITableView!
 	@IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 	
