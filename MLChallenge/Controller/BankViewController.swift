@@ -126,6 +126,22 @@ class BankViewController: UIViewController {
 		alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
 		self.present(alert, animated: true, completion: nil)
 	}
+	
+	//*****************************************************************
+	// MARK: - UI Enabled-Disabled
+	//*****************************************************************
+	
+	// task: habilitar o deshabilitar la UI de acuerdo a la lógica de la aplicación
+	func setUIEnabled(_ enabled: Bool) {
+		nextButton.isEnabled = enabled
+		
+		// adjust login button alpha
+		if enabled {
+			nextButton.alpha = 1.0
+		} else {
+			nextButton.alpha = 0.5
+		}
+	}
 
 } // end class
 
@@ -137,21 +153,19 @@ class BankViewController: UIViewController {
 extension BankViewController: UITableViewDataSource {
 	
 	// task: devolver la cantidad de filas que tendrá la tabla
-	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-
-		return allBanks.count
-	}
+	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { return allBanks.count }
 	
 	// task: configurar las celdas de la tabla
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		
+		let preImage = UIImage(named: "preImage")
 		let cellReuseId = "cell"
 		let bank = allBanks[(indexPath as NSIndexPath).row]
 		let cell = tableView.dequeueReusableCell(withIdentifier: cellReuseId, for: indexPath) as UITableViewCell!
-		
 		cell?.textLabel?.text = bank.name
-		debugPrint("los nombres de los bancos son \(bank.name)")
 		cell?.imageView!.contentMode = UIView.ContentMode.scaleAspectFit
+		cell?.imageView?.image = preImage
+
 		
 		if let thumbPath = bank.thumb {
 			debugPrint("🗿\(thumbPath)")
@@ -172,22 +186,6 @@ extension BankViewController: UITableViewDataSource {
 		
 		return cell!
 		
-	}
-	
-	//*****************************************************************
-	// MARK: - UI Enabled-Disabled
-	//*****************************************************************
-	
-	// task: habilitar o deshabilitar la UI de acuerdo a la lógica de la aplicación
-	func setUIEnabled(_ enabled: Bool) {
-		nextButton.isEnabled = enabled
-		
-		// adjust login button alpha
-		if enabled {
-			nextButton.alpha = 1.0
-		} else {
-			nextButton.alpha = 0.5
-		}
 	}
 	
 }

@@ -141,11 +141,13 @@ extension PayMethodViewController: UITableViewDataSource {
 	// task: configurar las celdas de la tabla
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		
+		let preImage = UIImage(named: "preImage")
 		let cellReuseId = "cell"
 		let creditCard = allCreditCards[(indexPath as NSIndexPath).row]
 		let cell = tableView.dequeueReusableCell(withIdentifier: cellReuseId, for: indexPath) as UITableViewCell
 		cell.textLabel?.text = creditCard.name
 		cell.imageView!.contentMode = UIView.ContentMode.scaleAspectFit
+		cell.imageView?.image = preImage
 
 
 		if let thumbPath = creditCard.thumb {
